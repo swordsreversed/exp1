@@ -12,12 +12,11 @@
 {% endfor %}
 
 <div class="draggable video" title = "">
-  <iframe width="250" src="https://www.youtube.com/embed/WgiJCrheBaA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+  <iframe width="250" src="https://www.youtube.com/embed/YibFHWZ66GQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 </div>
 <div class="draggable video" title = "">
   <audio controls src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_1MG.mp3"/>
 </div>
-
 
 {% endblock %}
 
@@ -30,7 +29,6 @@
 
     $( ".draggable" ).each(function( index ) {
       let posit = getRandomNumber(ww, wh);
-      console.log(posit)
       $(this).css('left', posit[0] + "px")
       $(this).css('top', posit[1]+ "px")
       $(this).removeClass('hidden')
@@ -39,10 +37,10 @@
     $( ".draggable" ).draggable({
       start: function(e) {
         $( ".draggable" ).each(function( index ) {
-        $(this).css("border", "none");
-        $(this).css("z-index", "1");
-      });
-        $(this).css("border", "4px solid #fc00ff");
+          //$(this).css("border", "none");
+          $(this).css("z-index", "1");
+        });
+        //$(this).css("border", "4px solid #fc00ff");
         $(this).css("z-index", "1010");
   
       },
