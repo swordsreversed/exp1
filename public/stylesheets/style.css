@@ -87,3 +87,16 @@ a:hover {
 	width: -moz-fit-content;
 	width: fit-content;
 }
+
+.ui-tooltip {
+	background-color: #fff;
+	width: fit-content;
+	padding: 0.4em 1em;
+	box-shadow: none;
+}
+
+.contr {
+	font-style: italic;
+	text-decoration: underline;
+	font-size: 1em;
+}

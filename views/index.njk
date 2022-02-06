@@ -7,16 +7,18 @@
 
 {% for image in images %}
 
-  <img class="imgSty midsize draggable hidden" src="/images/{{image}}"/>
+  <img title = "" class="imgSty midsize draggable hidden" src="/images/{{image}}"/>
 
 {% endfor %}
 
-<div class="draggable video">
-  <iframe  style="border: 1px green solid;" width="250" src="https://www.youtube.com/embed/WgiJCrheBaA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+<div class="draggable video" title = "">
+  <iframe width="250" src="https://www.youtube.com/embed/WgiJCrheBaA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 </div>
-<div class="draggable video">
+<div class="draggable video" title = "">
   <audio controls src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_1MG.mp3"/>
 </div>
+
+
 {% endblock %}
 
 
@@ -53,7 +55,21 @@
         let randomColor = '#'+ Math.floor(Math.random() * 19777215).toString(16);
         $(this).css("background-color", randomColor);
     });
-      
+
+
+   $( ".draggable" ).tooltip({
+                content: `<span><h3>Contribution {i}</h3>
+									<p className='contr'>by Sam Holleran</p>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+										incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+										nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+										Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+										fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+										culpa qui officia deserunt mollit anim id est laborum.
+									</p></span>`,
+               track:true
+            });
  });
 
 function getRandomNumber(ww, wh) {
