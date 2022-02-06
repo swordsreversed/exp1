@@ -1,0 +1,62 @@
+{% extends "base.njk" %}
+
+{% block content %}
+
+{% include "_header.njk" %}
+  <span><a href="about">More Info</a></span>
+
+{% for image in images %}
+
+  <img class="imgSty midsize draggable hidden" src="/images/{{image}}"/>
+
+{% endfor %}
+
+<div class="draggable video">
+  <iframe  style="border: 1px green solid;" width="250" src="https://www.youtube.com/embed/WgiJCrheBaA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+</div>
+<div class="draggable video">
+  <audio controls src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_1MG.mp3"/>
+</div>
+{% endblock %}
+
+
+{% block script %}
+  $( function() {
+
+    let ww = $(window).width();
+    let wh = $(window).height();
+
+    $( ".draggable" ).each(function( index ) {
+      let posit = getRandomNumber(ww, wh);
+      console.log(posit)
+      $(this).css('left', posit[0] + "px")
+      $(this).css('top', posit[1]+ "px")
+      $(this).removeClass('hidden')
+    }); 
+
+    $( ".draggable" ).draggable({
+      start: function(e) {
+        $( ".draggable" ).each(function( index ) {
+        $(this).css("border", "none");
+        $(this).css("z-index", "1");
+      });
+        $(this).css("border", "4px solid #fc00ff");
+        $(this).css("z-index", "1010");
+  
+      },
+      stop: function() {
+        $(this).css("border", "none");
+      }
+    });
+  
+  $
+      
+ });
+
+function getRandomNumber(ww, wh) {
+  let posx = Math.round(Math.random() * ww)-20;
+  let posy = Math.round(Math.random() * wh)-20;
+	return [posx, posy]
+}
+
+{% endblock %}
