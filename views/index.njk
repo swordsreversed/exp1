@@ -6,8 +6,9 @@
   <span style="margin-left: 4px;"><a href="about">More Info</a></span>
 
 {% for image in images %}
+  {% set imges = image | split(".") %}
 
-  <img title = "" class="imgSty midsize draggable hidden" src="/images/{{image}}"/>
+  <img title = "" id="{{imges[0]}}" class="imgSty midsize draggable hidden" src="/images/{{image}}"/>
 
 {% endfor %}
 
@@ -23,6 +24,8 @@
 
 {% block script %}
   $( function() {
+
+    
 
     let ww = $(window).width();
     let wh = $(window).height();
@@ -40,9 +43,13 @@
           //$(this).css("border", "none");
           $(this).css("z-index", "1");
         });
-        //$(this).css("border", "4px solid #fc00ff");
         $(this).css("z-index", "1010");
   
+      },
+      drag: function() {
+        line.position();
+        line2.position();
+        line3.position();
       },
       stop: function() {
         $(this).css("border", "none");
@@ -68,6 +75,35 @@
 									</p></span>`,
                   position: { of: "body", at: "left top-30" }
             });
+
+
+
+    let line = new LeaderLine({
+      start: document.getElementById('Photo_02'), 
+      end: document.getElementById('Text_03'), 
+      color: 'green',
+      startPlug: 'square',
+      endPlug: 'square'
+    });
+
+    let line2 = new LeaderLine({
+      start: document.getElementById('Text_03'), 
+      end: document.getElementById('Person_03'), 
+      color: 'green',
+      startPlug: 'square',
+      endPlug: 'square'
+    });
+
+    let line3 = new LeaderLine({
+      start: document.getElementById('Person_02'), 
+      end: document.getElementById('Text_02'), 
+      color: 'pink',
+      startPlug: 'square',
+      endPlug: 'square'
+    });
+
+
+
  });
 
 function getRandomNumber(ww, wh) {

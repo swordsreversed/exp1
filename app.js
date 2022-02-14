@@ -12,10 +12,20 @@ var aboutRouter = require('./routes/about');
 var app = express();
 
 // view engine setup
-nunjucks.configure('views', {
+// nunjucks.configure('views', {
+// 	autoescape: true,
+// 	express: app
+// });
+
+const env = nunjucks.configure('views', {
 	autoescape: true,
 	express: app
 });
+
+env.addFilter('split', function(str, delim) {
+	return str.split(delim);
+});
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'njk');
 

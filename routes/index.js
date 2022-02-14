@@ -3,16 +3,16 @@ var router = express.Router();
 
 let imgArry = [
 	'Person_01.png',
+	'Person_02.png',
+	'Person_03.png',
 	'Photo_01.png',
-	'Shape_03.png',
+	'Photo_03.png',
 	'Text_01.png',
 	'Photo_02.png',
-	'Shape_06.png',
 	'Text_03.png',
-	'Shape_04.png'
+	'Text_02.png'
 ];
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
 	res.render('index', { title: 'Public Protocols', images: imgArry });
 });
