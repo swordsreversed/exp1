@@ -4,7 +4,6 @@ var router = express.Router();
 let imgArry = [
 	'Person_01.png',
 	'Person_02.png',
-	'Person_03.png',
 	'Photo_01.png',
 	'Photo_03.png',
 	'Text_01.png',
