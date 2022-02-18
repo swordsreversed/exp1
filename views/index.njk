@@ -5,28 +5,96 @@
 {% include "_header.njk" %}
   <span style="margin-left: 4px;"><a href="about">More Info</a></span>
 
-{% for image in images %}
-  {% set imges = image | split(".") %}
 
-  <img title = "" id="{{imges[0]}}" class="imgSty midsize draggable hidden" src="/images/{{image}}"/>
+{# {{ images | dump }} #}
+{% for image in images %}
+  {# {% set imges = image.url | split(".") %} #}
+
+  <img title = "" id="{{loop.index0}}" class="imgSty midsize draggable hidden" src="{{image.url}}"/>
+
 
 {% endfor %}
 
-<div class="draggable video" title = "">
+{# <div class="draggable video" title = "">
   <iframe width="250" src="https://www.youtube.com/embed/YibFHWZ66GQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 </div>
 <div class="draggable video" title = "">
   <audio controls src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_1MG.mp3"/>
-</div>
+</div> #}
 
 {% endblock %}
-
-
 {% block script %}
-  $( function() {
 
+  let dots = []
+  let  mouse = {
+      x: 0,
+      y: 0
+    };
+
+  var Dot = function() {
+    this.x = 0;
+    this.y = 0;
+    this.node = (function(){
+      var n = document.createElement("div");
+      n.className = "trail";
+      document.body.appendChild(n);
+      return n;
+    }());
+  };
+
+  Dot.prototype.draw = function() {
+    this.node.style.left = this.x + "px";
+    this.node.style.top = this.y + "px";
+  };
+
+  for (var i = 0; i < 12; i++) {
+    var d = new Dot();
+    dots.push(d);
+  }
+
+  // This is the screen redraw function
+function draw() {
+  // Make sure the mouse position is set everytime
+    // draw() is called.
+  var x = mouse.x,
+      y = mouse.y;
+  
+  // This loop is where all the 90s magic happens
+  dots.forEach(function(dot, index, dots) {
+    var nextDot = dots[index + 1] || dots[0];
     
+    dot.x = x;
+    dot.y = y;
+    dot.draw();
+    x += (nextDot.x - dot.x) * .6;
+    y += (nextDot.y - dot.y) * .6;
 
+  });
+}
+
+function animate(toggle) {
+  if (toggle) {
+    draw();
+    requestAnimationFrame(animate);
+  }
+}
+
+addEventListener("mousemove", function(event) {
+  //event.preventDefault();
+  mouse.x = event.pageX;
+  mouse.y = event.pageY;
+});
+
+let contn = [ 
+  {% for image in images %}
+
+  [{{loop.index0}}, "{{image.description | safe }}", "{{image.alt | safe}}", "{{image.caption | safe}}"],
+
+{% endfor %}
+];
+
+  $( function() {
+    
     let ww = $(window).width();
     let wh = $(window).height();
 
@@ -39,20 +107,17 @@
 
     $( ".draggable" ).draggable({
       start: function(e) {
+        console.log('currentTarget', e.currentTarget)
         $( ".draggable" ).each(function( index ) {
-          //$(this).css("border", "none");
           $(this).css("z-index", "1");
         });
         $(this).css("z-index", "1010");
   
       },
       drag: function() {
-        line.position();
-        line2.position();
-        line3.position();
+     
       },
       stop: function() {
-        $(this).css("border", "none");
       }
     });
   
@@ -63,44 +128,18 @@
 
 
    $( ".draggable" ).tooltip({
-        content: `<span><h3>Contribution {i}</h3>
-          <p className='contr'>by Sam Holleran</p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p></span>`,
-          position: { of: "body", at: "left top-30" }
+        open: function( event, ui ) {
+          let cid = event.currentTarget.id;
+          let res = contn[cid][2] + "<br/>" + contn[cid][3] + "<br/>" + contn[cid][1];
+          $( this ).tooltip( "option", "content", res );
+
+        },
+        content: 'test',
+        position: { of: "body", at: "left top+120px" }
     });
 
-    let line = new LeaderLine({
-      start: document.getElementById('Photo_02'), 
-      end: document.getElementById('Text_03'), 
-      color: 'green',
-      startPlug: 'square',
-      endPlug: 'square'
-    });
-
-    let line2 = new LeaderLine({
-      start: document.getElementById('Text_03'), 
-      end: document.getElementById('Person_01'), 
-      color: 'green',
-      startPlug: 'square',
-      endPlug: 'square'
-    });
-
-    let line3 = new LeaderLine({
-      start: document.getElementById('Person_02'), 
-      end: document.getElementById('Text_02'), 
-      color: 'pink',
-      startPlug: 'square',
-      endPlug: 'square'
-    });
-
-
+   
+  //animate(true);
 
  });
 

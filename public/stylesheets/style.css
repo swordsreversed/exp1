@@ -100,3 +100,11 @@ a:hover {
 	text-decoration: underline;
 	font-size: 1em;
 }
+
+.trail {
+	/* className for the trail elements */
+	position: absolute;
+	height: 6px;
+	width: 6px;
+	background: gold;
+}
