@@ -5,14 +5,8 @@
 {% include "_header.njk" %}
   <span style="margin-left: 4px;"><a href="about">More Info</a></span>
 
-
-{# {{ images | dump }} #}
 {% for image in images %}
-  {# {% set imges = image.url | split(".") %} #}
-
-  <img title = "" id="{{loop.index0}}" class="imgSty midsize draggable hidden" src="{{image.url}}"/>
-
-
+  <img title = "{{image.alt}}" id="{{loop.index0}}" class="imgSty midsize draggable hidden" src="{{image.url}}"/>
 {% endfor %}
 
 {# <div class="draggable video" title = "">
@@ -25,66 +19,7 @@
 {% endblock %}
 {% block script %}
 
-  let dots = []
-  let  mouse = {
-      x: 0,
-      y: 0
-    };
-
-  var Dot = function() {
-    this.x = 0;
-    this.y = 0;
-    this.node = (function(){
-      var n = document.createElement("div");
-      n.className = "trail";
-      document.body.appendChild(n);
-      return n;
-    }());
-  };
-
-  Dot.prototype.draw = function() {
-    this.node.style.left = this.x + "px";
-    this.node.style.top = this.y + "px";
-  };
-
-  for (var i = 0; i < 12; i++) {
-    var d = new Dot();
-    dots.push(d);
-  }
-
-  // This is the screen redraw function
-function draw() {
-  // Make sure the mouse position is set everytime
-    // draw() is called.
-  var x = mouse.x,
-      y = mouse.y;
   
-  // This loop is where all the 90s magic happens
-  dots.forEach(function(dot, index, dots) {
-    var nextDot = dots[index + 1] || dots[0];
-    
-    dot.x = x;
-    dot.y = y;
-    dot.draw();
-    x += (nextDot.x - dot.x) * .6;
-    y += (nextDot.y - dot.y) * .6;
-
-  });
-}
-
-function animate(toggle) {
-  if (toggle) {
-    draw();
-    requestAnimationFrame(animate);
-  }
-}
-
-addEventListener("mousemove", function(event) {
-  //event.preventDefault();
-  mouse.x = event.pageX;
-  mouse.y = event.pageY;
-});
-
 let contn = [ 
   {% for image in images %}
 
@@ -107,7 +42,6 @@ let contn = [
 
     $( ".draggable" ).draggable({
       start: function(e) {
-        console.log('currentTarget', e.currentTarget)
         $( ".draggable" ).each(function( index ) {
           $(this).css("z-index", "1");
         });
@@ -137,9 +71,6 @@ let contn = [
         content: 'test',
         position: { of: "body", at: "left top+120px" }
     });
-
-   
-  //animate(true);
 
  });
 
