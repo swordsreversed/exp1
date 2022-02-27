@@ -3,8 +3,10 @@
 {% block content %}
 
 {% include "_header.njk" %}
-  <span style="margin-left: 4px;"><a href="about">More Info</a></span>
 
+  
+  <div class="result"></div>
+      
 {% for image in images %}
   <img title = "{{image.alt}}" id="{{loop.index0}}" class="imgSty midsize draggable hidden" src="{{image.url}}"/>
 {% endfor %}
@@ -15,6 +17,7 @@
 <div class="draggable video" title = "">
   <audio controls src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_1MG.mp3"/>
 </div> #}
+<div id="dad"></div>
 
 {% endblock %}
 {% block script %}
@@ -28,7 +31,18 @@ let contn = [
 {% endfor %}
 ];
 
+let suntn = [ 
+  {% for image in images %}
+
+  [{{loop.index0}}, "{{image.url | safe }}"],
+
+{% endfor %}
+];
+
   $( function() {
+
+    // const currentDiv = document.getElementById("div1");
+ 
     
     let ww = $(window).width();
     let wh = $(window).height();
@@ -69,7 +83,7 @@ let contn = [
 
         },
         content: 'test',
-        position: { of: "body", at: "left top+120px" }
+        position: { of: "body", at: "left top+140px" }
     });
 
   new ghostCursor();
@@ -81,4 +95,19 @@ function getRandomNumber(ww, wh) {
 	return [posx, posy]
 }
 
+// filter 
+
+
+const input = document.querySelector('.student');
+const log = document.querySelector('.result');
+
+// input.addEventListener('input', updateValue);
+
+function updateValue(e) {
+  log.textContent = e.target.value;
+};
+
+
+
 {% endblock %}
+

@@ -6,6 +6,8 @@
 
 <div class='container'>
 			<div class='content'>
+			Filter <input value="" class="student" name="student"/>
+			<p class="result">hi</a>
 				<h2>About</h2>
 				<p>
 					This four-week workshop invites participants of all ages and backgrounds to expand on M_Pavilion’s
@@ -55,3 +57,16 @@
 
 {% endblock %}
 
+
+{% block script %}
+
+const input = document.querySelector('.student');
+const log = document.querySelector('.result');
+
+input.addEventListener('input', updateValue);
+
+function updateValue(e) {
+  log.textContent = e.target.value;
+}
+
+{% endblock %}
