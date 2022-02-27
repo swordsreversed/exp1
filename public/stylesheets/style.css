@@ -52,7 +52,6 @@ a:hover {
 }
 
 .container {
-	text-align: center;
 	margin-top: 2em;
 	display: flex;
 	justify-content: space-evenly;
