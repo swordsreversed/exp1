@@ -4,11 +4,10 @@
 
 {% include "_header.njk" %}
 
-  
   <div class="result"></div>
       
 {% for image in images %}
-  <img title = "{{image.alt}}" id="{{loop.index0}}" class="imgSty midsize draggable hidden" src="{{image.url}}"/>
+  <img title = "{{image.alt}}" name="{{loop.index0}}" id="{{image.altShort}}{{loop.index0}}" class="imgSty midsize draggable hidden" src="{{image.url}}"/>
 {% endfor %}
 
 {# <div class="draggable video" title = "">
@@ -17,7 +16,6 @@
 <div class="draggable video" title = "">
   <audio controls src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_1MG.mp3"/>
 </div> #}
-<div id="dad"></div>
 
 {% endblock %}
 {% block script %}
@@ -26,20 +24,23 @@
 let contn = [ 
   {% for image in images %}
 
-  [{{loop.index0}}, "{{image.description | safe }}", "{{image.alt | safe}}", "{{image.caption | safe}}"],
+    [{{loop.index0}},  "{{image.description | safe }}", "{{image.alt | safe}}", "{{image.caption | safe}}"],
 
-{% endfor %}
+  {% endfor %}
 ];
 
 let suntn = [ 
   {% for image in images %}
 
-  [{{loop.index0}}, "{{image.url | safe }}"],
+    [{{loop.index0}}, "{{image.altShort| safe}}", "{{image.url | safe }}",  "{{image.alt | safe}}", "{{image.altShort}}{{loop.index0}}" ],
 
-{% endfor %}
+  {% endfor %}
 ];
 
   $( function() {
+
+    
+
 
     // const currentDiv = document.getElementById("div1");
  
@@ -63,7 +64,10 @@ let suntn = [
   
       },
       drag: function() {
-     
+        linez.forEach((line) => {
+          line.position();
+        })
+       // window['line' + + fsr[i][0] + fsr[i][1].replace(/\s/g, '')].position()
       },
       stop: function() {
       }
@@ -74,19 +78,47 @@ let suntn = [
         $(this).css("background-color", randomColor);
     });
 
-
-   $( ".draggable" ).tooltip({
+    $( ".draggable" ).tooltip({
         open: function( event, ui ) {
-          let cid = event.currentTarget.id;
+          let cid = event.currentTarget.name;
           let res = contn[cid][2] + "<br/>" + contn[cid][3] + "<br/>" + contn[cid][1];
           $( this ).tooltip( "option", "content", res );
 
         },
         content: 'test',
-        position: { of: "body", at: "left top+140px" }
+        position: { of: "html", at: "left top+140px" }
     });
 
   new ghostCursor();
+  // set up lines last
+  const unique = [...new Set(suntn.map(item => item[1]))]
+  let fsr = []
+  unique.forEach((usr) => {
+    fsr.push(suntn.filter((item) => item[1] == usr))
+  })
+
+  let liners = fsr.filter((user) => user.length > 1)
+  let colors = ['red','green','purple','blue','orange','brown']
+  let linez = [];
+
+  for (let i = 0; i < liners.length-1; i++) {
+    // in with the artist
+    for (let j = 0; j < liners[i].length-1; j++) {
+      let rndm = Math.random(1000);
+
+      window['line' + liners[i][j][4]] = new LeaderLine({
+        start: document.getElementById(liners[i][j][4]), 
+        end: document.getElementById(liners[i][j+1][4]), 
+        color: colors[Math.floor(Math.random()*colors.length)],
+        startPlug: 'square',
+        endPlug: 'square'
+      });
+
+      linez.push(window['line' + liners[i][j][4]])
+
+    }
+  }
+ 
  });
 
 function getRandomNumber(ww, wh) {
@@ -96,7 +128,6 @@ function getRandomNumber(ww, wh) {
 }
 
 // filter 
-
 
 const input = document.querySelector('.student');
 const log = document.querySelector('.result');

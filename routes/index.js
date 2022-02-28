@@ -29,7 +29,8 @@ router.get('/', function(req, res, next) {
 					.replace(/(?:\r\n|\r|\n)/g, '<br>')
 					.replace(regex, ''),
 				caption: item.caption.rendered.replace(/(?:\r\n|\r|\n)/g, '<br>'),
-				alt: item.alt_text.replace(/(?:\r\n|\r|\n)/g, '<br>')
+				alt: item.alt_text.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+				altShort: item.alt_text.replace(' ', '')
 			};
 		});
 		// console.log(imgArry);
