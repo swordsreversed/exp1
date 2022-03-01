@@ -41,14 +41,15 @@ let suntn = [
 
     // const currentDiv = document.getElementById("div1");
  
-    
-    let ww = $(window).width();
-    let wh = $(window).height();
+    let divsize = 250;
 
     $( ".draggable" ).each(function( index ) {
-      let posit = getRandomNumber(ww, wh);
-      $(this).css('left', posit[0] + "px")
-      $(this).css('top', posit[1]+ "px")
+
+      var posx = (Math.random() * ($(document).width() - divsize)).toFixed();
+      var posy = (Math.random() * ($(document).height() - divsize)).toFixed();
+      $(this).css('left', posx + "px")
+      $(this).css('top', posy + "px")
+
       $(this).removeClass('hidden')
     }); 
 
@@ -64,7 +65,6 @@ let suntn = [
         linez.forEach((line) => {
           line.position();
         })
-       // window['line' + + fsr[i][0] + fsr[i][1].replace(/\s/g, '')].position()
       },
       stop: function() {
       }

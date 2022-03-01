@@ -33,7 +33,6 @@ router.get('/', function(req, res, next) {
 		});
 		// const uniqImgs = [ ...new Set(imgArry.map((item) => item[4])) ];
 		const arrUniq = [ ...new Map(imgArry.map((v) => [ v.url, v ])).values() ];
-		console.log(arrUniq, arrUniq.length);
 		res.render('index', { title: 'Public Protocols', images: arrUniq });
 	});
 });
