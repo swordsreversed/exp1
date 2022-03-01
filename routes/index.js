@@ -2,20 +2,18 @@ var express = require('express');
 var router = express.Router();
 let fetch = require('node-fetch');
 
-let imgArry3 = [
-	// 'Person_01.png',
-	// 'Person_02.png',
-	// 'Photo_01.png',
-	// 'Photo_03.png',
-	// 'Text_01.png',
-	// 'Photo_02.png',
-	// 'Text_03.png',
-	// 'Text_02.png'
-];
+Array.prototype.shuffle =
+	Array.prototype.shuffle ||
+	function() {
+		var copy = this.slice(),
+			arr = [];
+		while (copy.length) arr.push(copy.splice((Math.random() * copy.length) << 0));
+		return arr;
+	};
 
 router.get('/', function(req, res, next) {
 	fetch('http://34.129.140.166/wp-json/wp/v2/media?per_page=100').then((response) => response.json()).then((data) => {
-		let rData = randEl(data, 10);
+		let rData = randEl(data, 15);
 
 		// imgArry = rData.map((item) => item.source_url);
 		imgArry = rData.map((item) => {
@@ -33,8 +31,10 @@ router.get('/', function(req, res, next) {
 				altShort: item.alt_text.replace(' ', '')
 			};
 		});
-		// console.log(imgArry);
-		res.render('index', { title: 'Public Protocols', images: imgArry });
+		// const uniqImgs = [ ...new Set(imgArry.map((item) => item[4])) ];
+		const arrUniq = [ ...new Map(imgArry.map((v) => [ v.url, v ])).values() ];
+		console.log(arrUniq, arrUniq.length);
+		res.render('index', { title: 'Public Protocols', images: arrUniq });
 	});
 });
 
