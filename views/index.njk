@@ -19,7 +19,6 @@
 
 {% endblock %}
 {% block script %}
-
   
 let contn = [ 
   {% for image in images %}
@@ -38,8 +37,6 @@ let suntn = [
 ];
 
   $( function() {
-
-    // const currentDiv = document.getElementById("div1");
  
     let divsize = 250;
 
@@ -53,13 +50,16 @@ let suntn = [
       $(this).removeClass('hidden')
     }); 
 
+    $( ".draggable" ).hover(function(){
+        $('#cursor').find('img').attr('src','images/clicker.png')
+  
+    }, function(){
+        $('#cursor').find('img').attr('src','images/move.png')
+    });
+
     $( ".draggable" ).draggable({
       start: function(e) {
-        $( ".draggable" ).each(function( index ) {
-          $(this).css("z-index", "1");
-        });
-        $(this).css("z-index", "1010");
-  
+        $('#cursor').find('img').attr('src','images/clicker.png')
       },
       drag: function() {
         linez.forEach((line) => {
@@ -86,7 +86,7 @@ let suntn = [
         position: { of: "html", at: "left top+140px" }
     });
 
-  new ghostCursor();
+
   // set up lines last
   const unique = [...new Set(suntn.map(item => item[1]))]
   let fsr = []
@@ -137,3 +137,9 @@ function updateValue(e) {
 
 {% endblock %}
 
+{% block post %}
+ <div id="cursor"><img alt="Cursor Hand" src="images/move.png"></div>
+
+  <script src="/js/animcursor.js"></script>
+
+{% endblock %}

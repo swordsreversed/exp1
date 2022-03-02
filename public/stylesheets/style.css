@@ -5,7 +5,7 @@ html {
 		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 	font-size: 0.875rem;
 	line-height: 1.375rem;
-	cursor: url("/images/move.png"), auto;
+	cursor: none;
 }
 
 .midsize {
@@ -36,10 +36,10 @@ a:hover {
 	display: none;
 }
 
-.draggable,
+/* .draggable,
 .cursor {
 	cursor: url("/images/clicker2.png"), auto;
-}
+} */
 
 .draggable:hover {
 	transform: scale(1.2);
@@ -103,10 +103,24 @@ a:hover {
 	font-size: 1em;
 }
 
+#cursor {
+	position: absolute;
+	left: -28px;
+	top: -34px;
+	will-change: transform;
+	transform: translate(-999px, -999px);
+	pointer-events: none;
+}
+#cursor img {
+	will-change: transform;
+	transition: transform 0.1s linear;
+}
+
 .trail {
 	/* className for the trail elements */
 	position: absolute;
-	height: 6px;
-	width: 6px;
-	background: gold;
+	height: 8px;
+	width: 8px;
+	border-radius: 0px;
+	background: rgb(150, 26, 131);
 }
