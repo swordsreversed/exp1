@@ -114,15 +114,18 @@ let suntn = [
       linez.push(window['line' + liners[i][j][4]])
 
     }
+
+    suntn.forEach((image, index) => {
+      let cdoc = document.getElementById(image[4])
+      if (cdoc) {
+        if (cdoc.clientHeight/2 > cdoc.clientWidth) {
+          cdoc.style.height = cdoc.clientHeight*75/100+ 'px';
+        }
+      }
+    })
   }
  
  });
-
-function getRandomNumber(ww, wh) {
-  let posx = Math.round(Math.random() * ww)-20;
-  let posy = Math.round(Math.random() * wh)-20;
-	return [posx, posy]
-}
 
 // filter 
 
@@ -138,8 +141,7 @@ function updateValue(e) {
 {% endblock %}
 
 {% block post %}
- <div id="cursor"><img alt="Cursor Hand" src="images/move.png"></div>
-
+  <div id="cursor"><img alt="Cursor Hand" src="images/move.png"></div>
   <script src="/js/animcursor.js"></script>
 
 {% endblock %}
