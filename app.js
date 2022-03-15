@@ -8,6 +8,7 @@ const nunjucks = require('nunjucks');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var aboutRouter = require('./routes/about');
+var mobileRouter = require('./routes/mobile');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/about', aboutRouter);
+app.use('/mobile', mobileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

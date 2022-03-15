@@ -1,0 +1,29 @@
+{% extends "base.njk" %}
+
+{% block content %}
+
+{% include "_header.njk" %}
+
+<div class="">
+  <img class="midsize draggable" src="https://scontent.fmel11-1.fna.fbcdn.net/v/t39.30808-6/275437340_10158411496940766_3674596758685822874_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=5cd70e&_nc_ohc=rnYXwb2OuvAAX9u6xWN&tn=rv_l8DjDoP9Ddkiw&_nc_ht=scontent.fmel11-1.fna&oh=00_AT_RLjA8V-eSDq8kiM503pfhR724yemCzNhYZlBfBO_8BQ&oe=6235F139"/>
+</div>
+
+{% endblock %}
+
+{% block script %}
+$( function() {
+ 
+    let divsize = 250;
+
+    $( ".draggable" ).draggable({
+      start: function(e) {
+      },
+      drag: function() {
+      },
+      stop: function() {
+      }
+    });
+
+});
+
+{% endblock %}

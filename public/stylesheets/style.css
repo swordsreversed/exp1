@@ -1,4 +1,12 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body,
 html {
+	min-height: 100%;
 	background: #eee;
 	color: #222831;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
@@ -6,6 +14,26 @@ html {
 	font-size: 0.875rem;
 	line-height: 1.375rem;
 	cursor: none;
+}
+
+ul,
+li {
+	list-style-type: none;
+}
+
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 10;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: none;
+}
+
+.maincon.extra_stuff:before {
+	display: block;
 }
 
 .midsize {
@@ -30,6 +58,7 @@ a:hover {
 	position: fixed;
 	width: 250px;
 	z-index: 35000;
+	border: 1px solid red;
 }
 
 .hidden {
@@ -123,4 +152,26 @@ a:hover {
 	width: 8px;
 	border-radius: 0px;
 	background: rgb(150, 26, 131);
+}
+
+#menucon {
+	display: none;
+	position: fixed;
+	top: 200px;
+	width: 100%;
+	justify-content: center;
+}
+
+.menu {
+	background-color: #fff;
+	margin: 1em;
+	line-height: 2em;
+	padding: 1em;
+	border: solid 1px black;
+}
+
+@media screen and (max-width: 480px) {
+	.logo {
+		width: 100%;
+	}
 }
