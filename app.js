@@ -12,7 +12,6 @@ var mobileRouter = require('./routes/mobile');
 var testRouter = require('./routes/test');
 
 var app = express();
-
 // view engine setup
 // nunjucks.configure('views', {
 // 	autoescape: true,
@@ -41,7 +40,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/', testRouter);
+app.use('/test', testRouter);
 app.use('/users', usersRouter);
 app.use('/about', aboutRouter);
 app.use('/mobile', mobileRouter);
