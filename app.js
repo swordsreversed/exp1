@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const nunjucks = require('nunjucks');
 
-// var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/index2');
 var usersRouter = require('./routes/users');
 var aboutRouter = require('./routes/about');
 var mobileRouter = require('./routes/mobile');
@@ -40,7 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
+app.use('/', indexRouter);
 app.use('/', testRouter);
 app.use('/users', usersRouter);
 app.use('/about', aboutRouter);
