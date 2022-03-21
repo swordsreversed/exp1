@@ -113,7 +113,8 @@ $( function() {
 
     $( ".draggable" ).draggable({
       start: function(e) {
-        $('#cursor').find('img').attr('src','images/03_Hover-OnClick-and-Drag_1282.png')
+      $('#cursor').find('img').attr('src','images/04_Click-and-Drag-Alternative.png')
+       $(' body').css('cursor', 'none');
          $( ".draggable" ).each(function( index ) {
           $(this).css("z-index", "1");
         });
@@ -146,7 +147,7 @@ $( function() {
        //console.log($('#cursor').position())
       let cc = $(this).find('img').attr('week')
       $(this).addClass(`week${cc}`)
-      $('#cursor').find('img').attr('src','images/01_Neutral_128.png')
+      $('#cursor').find('img').attr('src','images/03_Hover-OnClick-and-Drag_1282.png')
   
     }, function(){
         //$(this).css("background-color", 'transparent')
