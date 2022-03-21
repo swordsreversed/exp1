@@ -140,6 +140,7 @@ a:hover {
 	will-change: transform;
 	transform: translate(-999px, -999px);
 	pointer-events: none;
+	/* border: #3d9a21 1px solid; */
 }
 #cursor img {
 	will-change: transform;

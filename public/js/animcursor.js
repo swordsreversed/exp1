@@ -67,11 +67,12 @@ document.addEventListener('DOMContentLoaded', rotatingCursor.initialize);
 
 // trail
 
-var dots = [],
+let dots = [],
 	mouse = {
 		x: 0,
 		y: 0
 	};
+// let mouseEl = document.getElementById('cursor');
 
 // The Dot object used to scaffold the dots
 var Dot = function() {
@@ -80,7 +81,8 @@ var Dot = function() {
 	this.node = (function() {
 		var n = document.createElement('div');
 		n.className = 'trail';
-		document.body.appendChild(n);
+		mouseEl.appendChild(n);
+		// document.body.appendChild(n);
 		return n;
 	})();
 };
@@ -111,16 +113,23 @@ function draw() {
 		dot.x = x;
 		dot.y = y;
 		dot.draw();
+		// console.log(nextDot.x, dot.x);
 		x += (nextDot.x - dot.x) * 0.6;
 		y += (nextDot.y - dot.y) * 0.6;
 	});
 }
 
-addEventListener('mousemove', function(event) {
-	//event.preventDefault();
-	mouse.x = event.pageX;
-	mouse.y = event.pageY;
-});
+// addEventListener('mousemove', function(event) {
+// 	//event.preventDefault();
+// 	// get pos of #cursor
+// 	let foo = offset(mouseEl);
+// 	// [ mouse.x, mouse.y ] = offset(mouseEl);
+// 	mouse.x = event.pageX - foo[0];
+// 	console.log(event.pageX, foo[0]);
+// 	// mouse.x = event.pageX;
+// 	mouse.y = event.pageY - foo[1];
+// 	// mouse.y = event.pageY;
+// });
 
 // animate() calls draw() then recursively calls itself
 // everytime the screen repaints via requestAnimationFrame().
@@ -129,4 +138,9 @@ function animate() {
 	requestAnimationFrame(animate);
 }
 
-// animate();
+animate();
+
+function offset(el) {
+	let rect = el.getBoundingClientRect();
+	return [ rect.x, rect.y ];
+}

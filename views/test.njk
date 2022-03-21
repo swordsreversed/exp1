@@ -43,11 +43,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     console.log(el[5])
     var div = document.createElement('div');
-    div.classList.add('box', 'draggable', 'hidden')
+    div.classList.add('box')
 
     let img = document.createElement('img');
     img.src = el[2];
-    img.classList.add('midimg')
+    img.classList.add('midimg', 'draggable', 'hidden')
     img.setAttribute("id", el[4]);
     img.setAttribute("alt", el[1]);
     img.setAttribute("title", el[5]);
@@ -114,7 +114,7 @@ $( function() {
 
     $( ".draggable" ).draggable({
       start: function(e) {
-        $('#cursor').find('img').attr('src','images/clicker2.png')
+        $('#cursor').find('img').attr('src','images/02_Hover-OnClick-and-Drag_64.png')
          $( ".draggable" ).each(function( index ) {
           $(this).css("z-index", "1");
         });
@@ -145,11 +145,11 @@ $( function() {
     $( ".draggable" ).hover(function(){
       let cc = $(this).find('img').attr('week')
       $(this).addClass(`week${cc}`)
-      $('#cursor').find('img').attr('src','images/clicker2.png')
+      $('#cursor').find('img').attr('src','images/02_Hover-OnClick-and-Drag_64.png')
   
     }, function(){
         //$(this).css("background-color", 'transparent')
-        $('#cursor').find('img').attr('src','images/move.png')
+        $('#cursor').find('img').attr('src','images/01_Neutral_64.png')
     });
 
     $( ".midimg" ).tooltip({
@@ -206,7 +206,7 @@ $( function() {
 {% endblock %}
 
 {% block post %}
-  <div id="cursor"><img alt="Cursor Hand" src="images/move.png"></div>
+  <div id="cursor"><img alt="Cursor Hand" src="images/01_Neutral_64.png"></div>
   <script src="/js/animcursor.js"></script>
 
 {% endblock %}
