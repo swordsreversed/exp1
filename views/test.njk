@@ -21,7 +21,6 @@
 
 window.addEventListener('DOMContentLoaded', (event) => {
     console.log('DOM fully loaded and parsed');
-  
 
   let maintn = [ 
     {% for image in images %}
@@ -114,7 +113,7 @@ $( function() {
 
     $( ".draggable" ).draggable({
       start: function(e) {
-        $('#cursor').find('img').attr('src','images/02_Hover-OnClick-and-Drag_64.png')
+        $('#cursor').find('img').attr('src','images/03_Hover-OnClick-and-Drag_1282.png')
          $( ".draggable" ).each(function( index ) {
           $(this).css("z-index", "1");
         });
@@ -143,27 +142,41 @@ $( function() {
 
 
     $( ".draggable" ).hover(function(){
+       //console.log($('.ui-tooltip').position())
+       //console.log($('#cursor').position())
       let cc = $(this).find('img').attr('week')
       $(this).addClass(`week${cc}`)
-      $('#cursor').find('img').attr('src','images/02_Hover-OnClick-and-Drag_64.png')
+      $('#cursor').find('img').attr('src','images/01_Neutral_128.png')
   
     }, function(){
         //$(this).css("background-color", 'transparent')
         $('#cursor').find('img').attr('src','images/01_Neutral_64.png')
     });
 
+    // tooltip
     $( ".midimg" ).tooltip({
         open: function( event, ui ) {
           let cid = event.currentTarget.name;
-          let res = contn[cid][2] + "<br/>" + contn[cid][3] + "<br/>" + contn[cid][1];
+          let res = contn[cid][2] + "<br/>" + contn[cid][1];
           $( this ).tooltip( "option", "content", res );
+          //$( this ).css('z-index', 11100);
+
 
         },
         content: 'test',
-        position: { of: "html", at: "left top+140px" }
+        position: { of: "html", at: "left top+140px" },
+        using: function( pos, pos1 ) {
+                checkPos(pos, pos1);
+            }
     });
 
-    // set up lines last
+    function checkPos(pos,pos1){
+      console.log(pos,pos1)
+
+    }
+
+
+  // set up lines last
   const unique = [...new Set(suntn.map(item => item[1]))]
   let fsr = []
   unique.forEach((usr) => {

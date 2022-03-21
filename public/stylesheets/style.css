@@ -125,6 +125,7 @@ a:hover {
 	width: fit-content;
 	padding: 0.4em 1em;
 	box-shadow: none;
+	z-index: 50000;
 }
 
 .contr {
