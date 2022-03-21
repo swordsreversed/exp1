@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const nunjucks = require('nunjucks');
 
-var indexRouter = require('./routes/index');
+// var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var aboutRouter = require('./routes/about');
 var mobileRouter = require('./routes/mobile');
