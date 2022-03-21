@@ -3,12 +3,23 @@
 {% block content %}
 
 {% include "_header.njk" %}
-
   <div class="result"></div>
-      
-{% for image in images %}
-  <img title = "{{image.alt}}" name="{{loop.index0}}" id="{{image.altShort}}{{loop.index0}}" class="imgSty midsize draggable hidden" src="{{image.url}}"/>
-{% endfor %}
+  <div id="menucon">
+    <div class="menu">
+      <ul>
+        <li>Week 1</li>
+        <li>Week 2</li>
+        <li>Week 3</li>
+        <li>Week 4</li>
+        <li> <a href="about">More Info</a></li>
+        <input name="filter"/>
+      </ul>
+    </div>
+  </div>
+  <div id="boxs"></div>
+{# {% for image in images %}
+  <img title="{{image.alt}}" name="{{loop.index0}}" id="{{image.altShort}}{{loop.index0}}" class="imgSty midsize draggable hidden" src="{{image.url}}"/>
+{% endfor %} #}
 
 {# <div class="draggable video" title = "">
   <iframe width="250" src="https://www.youtube.com/embed/YibFHWZ66GQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
@@ -17,9 +28,14 @@
   <audio controls src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_1MG.mp3"/>
 </div> #}
 
+
+
 {% endblock %}
 {% block script %}
+
+const colorz = [ 'red', 'green', 'aqua', 'yellow']
   
+// tooltip array
 let contn = [ 
   {% for image in images %}
 
@@ -28,6 +44,7 @@ let contn = [
   {% endfor %}
 ];
 
+// lines array
 let suntn = [ 
   {% for image in images %}
 
@@ -35,6 +52,58 @@ let suntn = [
 
   {% endfor %}
 ];
+
+// actual images
+
+let maintn = [ 
+  {% for image in images %}
+
+    [{{loop.index0}}, "{{image.altShort| safe}}", "{{image.url | safe }}",  "{{image.alt | safe}}", "{{image.altShort}}{{loop.index0}}" ],
+
+  {% endfor %}
+];
+
+// create imgs
+let finImg;
+if (devIce) {
+  finImg = maintn.slice(0,3)
+} else {
+  finImg = [...maintn];
+}
+
+finImg.forEach(el => {
+  let item = document.createElement('div');
+  item.className = 'image-container';
+  //let initem = document.createElement('div');
+ // item.appendChild(initem);
+
+  let img = document.createElement('img');
+  img.src = el[2];
+  img.setAttribute("id", el[4]);
+  img.setAttribute("title", el[1]);
+  img.setAttribute("name", el[0]);
+  img.onload = function() {
+      var w = img.width;
+      var h = img.height;
+      console.log("NEW IMAGE width", w);
+      console.log("NEW IMAGE height: ", h);
+  item.setAttribute("style", "height:" + w + "px; width:"  + w + "px;");
+    }
+  let regxw = /Week-0(\d*)_/
+  let matchs = el[2].match(regxw);
+  if (matchs) {
+    img.setAttribute("week", matchs[1]);
+  }
+  //img.classList.add('imgSty', 'midsize', 'draggable', 'hidden')
+  img.classList.add('imgSty', 'midsize')
+  item.classList.add('midsize', 'draggable', 'hidden')
+
+  item.appendChild(img);
+  let colorItem = document.createElement('div');
+  colorItem.className = "afterOver";
+  //initem.appendChild(colorItem);
+  document.getElementById('boxs').appendChild(item);
+})
 
   $( function() {
  
@@ -51,15 +120,24 @@ let suntn = [
     }); 
 
     $( ".draggable" ).hover(function(){
-        $('#cursor').find('img').attr('src','images/clicker.png')
+      // add week color here
+      //let cco = $(this).attr('week')
+     // $(this).css("background-color", colorz[cco])
+
+      $('#cursor').find('img').attr('src','images/clicker.png')
   
     }, function(){
+        //$(this).css("background-color", 'transparent')
         $('#cursor').find('img').attr('src','images/move.png')
     });
 
     $( ".draggable" ).draggable({
       start: function(e) {
         $('#cursor').find('img').attr('src','images/clicker.png')
+         $( ".draggable" ).each(function( index ) {
+          $(this).css("z-index", "1");
+        });
+        $(this).css("z-index", "1010");
       },
       drag: function() {
         linez.forEach((line) => {
@@ -95,7 +173,6 @@ let suntn = [
   })
 
   let liners = fsr.filter((user) => user.length > 1)
-  let colors = ['red','green','purple','blue','orange','brown']
   let linez = [];
 
   for (let i = 0; i < liners.length-1; i++) {
@@ -124,8 +201,43 @@ let suntn = [
       }
     })
   }
- 
  });
+
+
+window.addEventListener('DOMContentLoaded', (event) => {
+
+  let mc = document.getElementById('menucon');
+  let ol = document.getElementById('overlay');
+  let lb = document.getElementById('logobox');
+  lb.addEventListener("click", (e) => {
+    e.preventDefault();
+    mc.style.display = "flex";
+    ol.style.display = "block";
+    mc.style.zIndex = 11100;
+    document.getElementById('maincon').classList.add("extra_stuff");
+
+  }, false);
+
+ mc.addEventListener("click", (e) => {
+    e.preventDefault();
+    closeModal();
+  }, false);
+
+  ol.addEventListener("click", (e) => {
+    e.preventDefault();
+     closeModal();
+  }, false);
+
+  closeModal = () => {
+    mc.style.display = "none";
+    ol.style.display = "none";
+    mc.style.zIndex = 0;
+  }
+
+});
+
+
+  
 
 // filter 
 

@@ -28,12 +28,14 @@ li {
 	height: 100%;
 	width: 100%;
 	z-index: 10;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.3);
 	display: none;
 }
 
-.maincon.extra_stuff:before {
-	display: block;
+#maincon {
+	height: 100vh;
+	width: 100vw;
+	position: relative;
 }
 
 .midsize {
@@ -58,7 +60,6 @@ a:hover {
 	position: fixed;
 	width: 250px;
 	z-index: 35000;
-	border: 1px solid red;
 }
 
 .hidden {
@@ -170,8 +171,65 @@ a:hover {
 	border: solid 1px black;
 }
 
+.image-container div {
+	width: fit-content;
+}
+
+/* .image-container img + div.afterOver {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	color: #fff;
+}
+
+.image-container:hover img + div.afterOver {
+	display: block;
+	transition: all 0.2s ease;
+	background: rgba(0, 150, 0, .6);
+} */
+
+.box {
+	position: absolute;
+	width: 250px;
+}
+
+.box img {
+	width: inherit;
+}
+
+.box :hover::after {
+	width: inherit;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: .6;
+	z-index: 100;
+}
+
+.box.week1:hover::after {
+	background-color: #e36383;
+}
+
+.box.week2:hover::after {
+	background-color: #303094;
+}
+
+.box.week3:hover::after {
+	background-color: #3d9a21;
+}
+
 @media screen and (max-width: 480px) {
 	.logo {
 		width: 100%;
+	}
+
+	.box {
+		width: 150px;
 	}
 }

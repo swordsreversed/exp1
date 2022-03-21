@@ -1,0 +1,212 @@
+{% extends "base.njk" %}
+
+{% block content %}
+
+{% include "_header.njk" %}
+ <div id="menucon">
+    <div class="menu">
+      <ul>
+        <li>Week 1</li>
+        <li>Week 2</li>
+        <li>Week 3</li>
+        <li>Week 4</li>
+        <li> <a href="about">More Info</a></li>
+        <input name="filter"/>
+      </ul>
+    </div>
+  </div>
+
+{% endblock %}
+{% block script %}
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+  
+
+  let maintn = [ 
+    {% for image in images %}
+      [{{loop.index0}}, "{{image.altShort| safe}}", "{{image.url | safe }}",  "{{image.alt | safe}}", "{{image.altShort}}{{loop.index0}}",  "{{image.title | safe}}" ],
+    {% endfor %}
+  ];
+
+  // create imgs
+  let finImg;
+  if (devIce) {
+    finImg = maintn.slice(0,5)
+  } else {
+    finImg = [...maintn];
+  }
+
+  let mcc = document.getElementById('maincon');
+
+  finImg.forEach(el => {
+
+    console.log(el[5])
+    var div = document.createElement('div');
+    div.classList.add('box', 'draggable', 'hidden')
+
+    let img = document.createElement('img');
+    img.src = el[2];
+    img.classList.add('midimg')
+    img.setAttribute("id", el[4]);
+    img.setAttribute("alt", el[1]);
+    img.setAttribute("title", el[5]);
+    img.setAttribute("name", el[0]);
+    div.setAttribute("id", el[0]);
+    let regxw = /Week-0(\d*)_/
+    let matchs = el[5].match(regxw);
+    if (matchs) {
+      img.setAttribute("week", matchs[1]);
+    }
+
+    div.appendChild(img);
+    mcc.appendChild(div);
+
+  });
+
+  // modal
+  let mc = document.getElementById('menucon');
+  let ol = document.getElementById('overlay');
+  let lb = document.getElementById('logobox');
+  lb.addEventListener("click", (e) => {
+    e.preventDefault();
+    mc.style.display = "flex";
+    ol.style.display = "block";
+    mc.style.zIndex = 11100;
+    document.getElementById('maincon').classList.add("extra_stuff");
+
+  }, false);
+
+ mc.addEventListener("click", (e) => {
+    e.preventDefault();
+    closeModal();
+  }, false);
+
+  ol.addEventListener("click", (e) => {
+    e.preventDefault();
+     closeModal();
+  }, false);
+
+  closeModal = () => {
+    mc.style.display = "none";
+    ol.style.display = "none";
+    mc.style.zIndex = 0;
+  }
+
+});
+
+$( function() {
+  const colors = [ 'red', 'green', 'aqua', 'yellow']
+
+  // tooltip array
+  let contn = [ 
+    {% for image in images %}
+      [{{loop.index0}},  "{{image.description | safe }}", "{{image.alt | safe}}", "{{image.caption | safe}}"],
+    {% endfor %}
+  ];
+  // lines array
+  let suntn = [ 
+    {% for image in images %}
+      [{{loop.index0}}, "{{image.altShort| safe}}", "{{image.url | safe }}",  "{{image.alt | safe}}", "{{image.altShort}}{{loop.index0}}" ],
+    {% endfor %}
+  ];
+  let divsize = 250;
+
+    $( ".draggable" ).draggable({
+      start: function(e) {
+        $('#cursor').find('img').attr('src','images/clicker2.png')
+         $( ".draggable" ).each(function( index ) {
+          $(this).css("z-index", "1");
+        });
+        $('#cursor').css("z-index", "10210");
+        $(this).css("z-index", "1010");
+      },
+      drag: function() {
+        linez.forEach((line) => {
+          line.position();
+        })
+      },
+      stop: function() {
+      }
+    });
+  
+
+    $( ".draggable" ).each(function( index ) {
+
+      var posw = (Math.random() * ($(document).width() - divsize)).toFixed();
+      var posh = (Math.random() * ($(document).height() - divsize)).toFixed();
+      $(this).css('left', posw + "px")
+      $(this).css('top', posh + "px")
+
+      $(this).removeClass('hidden')
+    }); 
+
+
+    $( ".draggable" ).hover(function(){
+      let cc = $(this).find('img').attr('week')
+      $(this).addClass(`week${cc}`)
+      $('#cursor').find('img').attr('src','images/clicker2.png')
+  
+    }, function(){
+        //$(this).css("background-color", 'transparent')
+        $('#cursor').find('img').attr('src','images/move.png')
+    });
+
+    $( ".midimg" ).tooltip({
+        open: function( event, ui ) {
+          let cid = event.currentTarget.name;
+          let res = contn[cid][2] + "<br/>" + contn[cid][3] + "<br/>" + contn[cid][1];
+          $( this ).tooltip( "option", "content", res );
+
+        },
+        content: 'test',
+        position: { of: "html", at: "left top+140px" }
+    });
+
+    // set up lines last
+  const unique = [...new Set(suntn.map(item => item[1]))]
+  let fsr = []
+  unique.forEach((usr) => {
+    fsr.push(suntn.filter((item) => item[1] == usr))
+  })
+
+  let liners = fsr.filter((user) => user.length > 1)
+  let linez = [];
+
+  for (let i = 0; i < liners.length-1; i++) {
+    // in with the artist
+    for (let j = 0; j < liners[i].length-1; j++) {
+      let rndm = Math.random(1000);
+
+      window['line' + liners[i][j][4]] = new LeaderLine({
+        start: document.getElementById(liners[i][j][4]), 
+        end: document.getElementById(liners[i][j+1][4]), 
+        color: colors[Math.floor(Math.random()*colors.length)],
+        startPlug: 'square',
+        endPlug: 'square'
+      });
+
+      linez.push(window['line' + liners[i][j][4]])
+
+    }
+
+    suntn.forEach((image, index) => {
+      let cdoc = document.getElementById(image[4])
+      if (cdoc) {
+        if (cdoc.clientHeight/2 > cdoc.clientWidth) {
+          cdoc.style.height = cdoc.clientHeight*75/100+ 'px';
+        }
+      }
+    })
+  }
+
+  // end jq
+  });
+
+{% endblock %}
+
+{% block post %}
+  <div id="cursor"><img alt="Cursor Hand" src="images/move.png"></div>
+  <script src="/js/animcursor.js"></script>
+
+{% endblock %}

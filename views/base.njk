@@ -18,14 +18,13 @@ let touch = 0;
 if (navigator.maxTouchPoints > 1) {
 	touch = 1;
 	console.log('nn', navigator.userAgent);
-	// alert('hi');
 }
 
 const regex = new RegExp(/iPhone/);
 console.log(navigator.userAgent);
 
 let devIce = regex.test(navigator.userAgent);
-console.log(devIce);
+console.log('touch', devIce);
 
 </script>
 </head>
@@ -34,6 +33,7 @@ console.log(devIce);
 <div id="overlay"></div>
   <div id="maincon">
     {% block content %}{% endblock %}
+  </div>
   </body>
 <script>
  {% block script %}{% endblock %}
