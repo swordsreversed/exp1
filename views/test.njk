@@ -159,14 +159,17 @@ $( function() {
     $( ".midimg" ).tooltip({
         open: function( event, ui ) {
           let cid = event.currentTarget.name;
-          let res = contn[cid][2] + "<br/>" + contn[cid][1];
+          let res = '<div class="explain">' + contn[cid][1] + '<div><strong>' + contn[cid][2] + '</strong></div></div>';
           $( this ).tooltip( "option", "content", res );
           //$( this ).css('z-index', 11100);
 
 
         },
         content: 'test',
-        position: { of: "html", at: "left top+140px" }
+        classes: {
+          "ui-tooltip": "tooltipper"
+        },
+        position: { of: "html", at: "left+5px top+140px" }
     });
 
   // set up lines last

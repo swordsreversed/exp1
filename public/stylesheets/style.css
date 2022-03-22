@@ -81,6 +81,11 @@ input {
 	display: none;
 }
 
+.tooltipper {
+	color: #0053e1 !important;
+	box-shadow: none;
+	border: 1px solid #1d1d1d;
+}
 /* .draggable,
 .cursor {
 	cursor: url("/images/clicker2.png"), auto;
