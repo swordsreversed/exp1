@@ -1,3 +1,9 @@
+@font-face {
+	font-family: 'Source Sans Pro';
+	src: url('fonts/SourceSansPro-Regular.eot');
+	src: local('Source Sans Pro'), local('Source-Sans-Pro'), url('fonts/SourceSansPro-Regular.otf') format('opentype');
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -7,13 +13,29 @@
 body,
 html {
 	min-height: 100%;
-	background: #eee;
-	color: #222831;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
-		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+	background: #e5e5e5;
+	color: #000;
+	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 0.875rem;
 	line-height: 1.375rem;
 	cursor: none;
+}
+
+a,
+a:visited {
+	color: #000;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #7387dc;
+}
+
+h1,
+h2,
+h3 {
+	margin: 1em 0;
+	color: #1d1d1d;
 }
 
 ul,
@@ -46,20 +68,13 @@ input {
 	padding-left: 5px;
 }
 
-a {
-	padding-top: 1em;
-	color: grey;
-	text-decoration: none;
-}
-
-a:hover {
-	color: #7387dc;
-}
-
 .logo {
 	position: fixed;
-	width: 250px;
 	z-index: 35000;
+}
+
+#logobox {
+	margin-left: .6em;
 }
 
 .hidden {
@@ -99,7 +114,6 @@ a:hover {
 }
 
 .content ul li {
-	font-family: Arial, Helvetica, sans-serif;
 	padding: 0;
 	display: block;
 	font-weight: normal;
@@ -136,12 +150,13 @@ a:hover {
 
 #cursor {
 	position: absolute;
-	left: -28px;
-	top: -34px;
+	left: -64px;
+	top: -64px;
 	will-change: transform;
 	transform: translate(-999px, -999px);
 	pointer-events: none;
 	/* border: #3d9a21 1px solid; */
+	z-index: 11010;
 }
 #cursor img {
 	will-change: transform;
@@ -224,6 +239,20 @@ a:hover {
 
 .box.week3:hover::after {
 	background-color: #3d9a21;
+}
+
+.dashedsvg {
+	background: transparent;
+	min-width: 100vw;
+	min-height: 100vh;
+	display: inline;
+}
+
+.dashedline {
+	fill: none;
+	stroke: #000;
+	stroke-width: 3px;
+	stroke-dasharray: 6, 6;
 }
 
 @media screen and (max-width: 480px) {

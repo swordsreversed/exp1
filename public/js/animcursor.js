@@ -6,7 +6,7 @@ let rotatingCursor = (function() {
 	let currentCursorPos = { x: -999, y: -999 };
 	let lastCursorAngle = 0,
 		cursorAngle = 0;
-	let cursorEl, cursorImageEl;
+	let cursorEl, cursorImageEl, h, wintimer;
 
 	/* Local Functions */
 
@@ -25,6 +25,30 @@ let rotatingCursor = (function() {
 		}
 		// Apply rotation
 		cursorImageEl.style.transform = `rotate(${cursorAngle - 90}deg)`;
+		// Add trail
+		var elem = document.createElement('div');
+		var size = 3 + 'px';
+		elem.style.position = 'fixed';
+		elem.style.zIndex = 10001;
+		elem.style.top = currentCursorPos.y + 'px';
+		elem.style.left = currentCursorPos.x + 'px';
+		elem.style.width = size;
+		elem.style.height = size;
+		elem.style.background = '#000';
+
+		elem.style.pointerEvents = 'none';
+
+		document.body.appendChild(elem);
+		if (h == 0) {
+			wintimer = 400;
+			h = 1;
+		} else {
+			h = 0;
+			wintimer = 500;
+		}
+		window.setTimeout(function() {
+			document.body.removeChild(elem);
+		}, wintimer);
 	}
 
 	function updateCursor() {
@@ -172,3 +196,41 @@ function offset(el) {
 // 	},
 // 	false
 // );
+
+// d3
+/*
+var npoints = 25;
+var ptdata = [];
+var line = d3
+	.line()
+	.x(function(d, i) {
+		return d[0];
+	})
+	.y(function(d, i) {
+		return d[1];
+	})
+	.curve(d3.curveBasis);
+
+var svg = d3.select('body').append('svg').attr('class', 'dashedsvg').append('g');
+var svgagain = d3.select('body').select('.dashedsvg').on('mousemove', function(e) {
+	var pt = d3.pointer(e);
+	tick(pt);
+});
+
+var path = svg.append('g').append('path').data([ ptdata ]).attr('class', 'dashedline').attr('d', line);
+
+function tick(pt) {
+	// push a new data point onto the back
+	ptdata.push(pt);
+
+	// Redraw the path:
+	path.attr('d', function(d) {
+		return line(d);
+	});
+
+	// If more than 100 points, drop the old data pt off the front
+	if (ptdata.length > npoints) {
+		ptdata.shift();
+	}
+}
+*/

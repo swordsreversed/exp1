@@ -37,7 +37,7 @@ router.get('/', function(req, res, next) {
 			};
 		});
 		const arrUniq = [ ...new Map(imgArry.map((v) => [ v.url, v ])).values() ];
-		res.render('test', { title: 'Public Protocols', images: arrUniq });
+		res.render('cursor', { title: 'Public Protocols', images: arrUniq });
 	})();
 });
 

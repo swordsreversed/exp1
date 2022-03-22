@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   finImg.forEach(el => {
 
-    console.log(el[5])
+    //console.log(el[5])
     var div = document.createElement('div');
     div.classList.add('box')
 
@@ -127,6 +127,7 @@ $( function() {
         })
       },
       stop: function() {
+        $('#cursor').find('img').attr('src','images/03_Hover-OnClick-and-Drag_1282.png')
       }
     });
   
@@ -151,7 +152,7 @@ $( function() {
   
     }, function(){
         //$(this).css("background-color", 'transparent')
-        $('#cursor').find('img').attr('src','images/01_Neutral_64.png')
+        $('#cursor').find('img').attr('src','images/01_Neutral_128.png')
     });
 
     // tooltip
@@ -165,17 +166,8 @@ $( function() {
 
         },
         content: 'test',
-        position: { of: "html", at: "left top+140px" },
-        using: function( pos, pos1 ) {
-                checkPos(pos, pos1);
-            }
+        position: { of: "html", at: "left top+140px" }
     });
-
-    function checkPos(pos,pos1){
-      console.log(pos,pos1)
-
-    }
-
 
   // set up lines last
   const unique = [...new Set(suntn.map(item => item[1]))]
@@ -220,7 +212,7 @@ $( function() {
 {% endblock %}
 
 {% block post %}
-  <div id="cursor"><img alt="Cursor Hand" src="images/01_Neutral_64.png"></div>
+  <div id="cursor"><img alt="Cursor Hand" src="images/01_Neutral_128.png"></div>
   <script src="/js/animcursor.js"></script>
 
 {% endblock %}

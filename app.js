@@ -35,8 +35,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', testRouter);
-// app.use('/test', testRouter);
+app.use('/', indexRouter);
+app.use('/test', testRouter);
 app.use('/users', usersRouter);
 app.use('/about', aboutRouter);
 app.use('/mobile', mobileRouter);

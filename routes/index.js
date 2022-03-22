@@ -2,22 +2,26 @@ var express = require('express');
 var router = express.Router();
 let fetch = require('node-fetch');
 
-Array.prototype.shuffle =
-	Array.prototype.shuffle ||
-	function() {
-		var copy = this.slice(),
-			arr = [];
-		while (copy.length) arr.push(copy.splice((Math.random() * copy.length) << 0));
-		return arr;
-	};
-
+let media = [];
 router.get('/', function(req, res, next) {
-	fetch('http://34.129.140.166/wp-json/wp/v2/media?per_page=100').then((response) => response.json()).then((data) => {
-		let rData = randEl(data, 9);
+	(async () => {
+		const tdata = await fetch('http://34.129.140.166/wp-json/wp/v2/media?per_page=100');
+		const [ ...nres ] = await tdata.headers;
 
-		// imgArry = rData.map((item) => item.source_url);
+		const total = nres.filter((el) => el[0] == 'x-wp-totalpages');
+		console.log('total', total[0][1]);
+
+		for (let index = 1; index <= total[0][1]; index++) {
+			let url = 'http://34.129.140.166/wp-json/wp/v2/media?per_page=100&page=' + index;
+			let jdata = await fetch(url);
+			media.push(await jdata.json());
+		}
+
+		const data = media.flat(1);
+		data.sort(() => Math.random() - 0.5);
+
+		const rData = randEl(data, 10);
 		imgArry = rData.map((item) => {
-			let ims = item.source_url.split('.');
 			const regex = /<a.+>.+<\/a>/i;
 
 			return {
@@ -28,13 +32,13 @@ router.get('/', function(req, res, next) {
 					.replace(regex, ''),
 				caption: item.caption.rendered.replace(/(?:\r\n|\r|\n)/g, '<br>'),
 				alt: item.alt_text.replace(/(?:\r\n|\r|\n)/g, '<br>'),
-				altShort: item.alt_text.replace(' ', '')
+				altShort: item.alt_text.replace(' ', ''),
+				title: item.title.rendered
 			};
 		});
-		// const uniqImgs = [ ...new Set(imgArry.map((item) => item[4])) ];
 		const arrUniq = [ ...new Map(imgArry.map((v) => [ v.url, v ])).values() ];
-		res.render('index2', { title: 'Public Protocols', images: arrUniq });
-	});
+		res.render('test', { title: 'Public Protocols', images: arrUniq });
+	})();
 });
 
 let randEl = (array, number) => {
