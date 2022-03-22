@@ -1,10 +1,23 @@
 @font-face {
 	font-family: 'Source Sans Pro';
-	src: url('fonts/SourceSansPro-Regular.eot');
-	src: local('Source Sans Pro'), local('Source-Sans-Pro'), url('fonts/SourceSansPro-Regular.otf') format('opentype');
+	src: url('/fonts/SourceSansPro-Regular.eot');
+	src: local('Source Sans Pro'), local('Source-Sans-Pro'), url('/fonts/SourceSansPro-Regular.otf') format('opentype');
 }
-
-* {
+@font-face {
+	font-family: 'Source Sans Pro';
+	src: url('/fonts/SourceSansPro-Semibold.eot');
+	src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'),
+		url('/fonts/SourceSansPro-Semibold.otf') format('opentype');
+	font-weight: bold;
+}
+@font-face {
+	font-family: 'Source Sans Pro';
+	src: url('/fonts/SourceSansPro-Black.eot');
+	src: local('Source Sans Pro Black'), local('SourceSansPro-Black'),
+		url('/fonts/SourceSansPro-Black.otf') format('opentype');
+	font-weight: bolder;
+}
+SourceSansPro-Black * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -36,6 +49,12 @@ h2,
 h3 {
 	margin: 1em 0;
 	color: #1d1d1d;
+	font-weight: bolder;
+}
+
+h1 {
+	font-size: 1.9rem;
+	letter-spacing: 0.2rem;
 }
 
 ul,
