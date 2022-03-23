@@ -1,10 +1,5 @@
 @font-face {
 	font-family: 'Source Sans Pro';
-	src: url('/fonts/SourceSansPro-Regular.eot');
-	src: local('Source Sans Pro'), local('Source-Sans-Pro'), url('/fonts/SourceSansPro-Regular.otf') format('opentype');
-}
-@font-face {
-	font-family: 'Source Sans Pro';
 	src: url('/fonts/SourceSansPro-Semibold.eot');
 	src: local('Source Sans Pro Semibold'), local('SourceSansPro-Semibold'),
 		url('/fonts/SourceSansPro-Semibold.otf') format('opentype');
@@ -17,7 +12,14 @@
 		url('/fonts/SourceSansPro-Black.otf') format('opentype');
 	font-weight: bolder;
 }
-SourceSansPro-Black * {
+@font-face {
+	font-family: 'Source Sans Pro';
+	src: url('/fonts/SourceSansPro-Regular.eot');
+	src: local('Source Sans Pro'), local('SourceSansPro'), url('/fonts/SourceSansPro-Regular.otf') format('opentype');
+	font-weight: normal;
+}
+
+* {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -36,6 +38,7 @@ html {
 }
 
 p {
+	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: normal;
 }
 
@@ -130,9 +133,11 @@ input {
 	display: flex;
 	justify-content: space-evenly;
 	margin: 2em 3em;
+	font-weight: normal;
 }
 
 .content {
+	margin-top: 1em;
 	width: 50%;
 	display: flex;
 	flex-direction: column;
@@ -211,10 +216,15 @@ input {
 
 .menu {
 	background-color: #fff;
-	margin: 1em;
+	width: 200px;
+	margin: 1em 3em;
 	line-height: 2em;
-	padding: 1em;
+	padding: 1em 3em;
 	border: solid 1px black;
+}
+
+.menu ul {
+	padding-left: 0;
 }
 
 .image-container div {
