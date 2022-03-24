@@ -85,6 +85,7 @@ li {
 	height: 100vh;
 	width: 100vw;
 	position: relative;
+	/* border: #7387dc 1px solid; */
 }
 
 .midsize {
@@ -101,7 +102,7 @@ input {
 }
 
 #logobox {
-	margin-left: .6em;
+	margin-left: 15px;
 }
 
 .hidden {
@@ -297,9 +298,21 @@ input {
 @media screen and (max-width: 480px) {
 	.logo {
 		width: 100%;
+		text-align: center;
 	}
 
 	.box {
 		width: 150px;
 	}
+}
+
+#mtest {
+	position: absolute;
+	left: 5px;
+	top: 65px;
+	color: red;
+	text-align: center;
+	width: 100%;
+	font-size: 2em;
+	font-weight: bold;
 }

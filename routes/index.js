@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
 	dataPromise = getMedia(req.params);
 	dataPromise.then((data) => {
 		let renderArray = createRender(data, req.params);
-		console.log(renderArray[0]);
 		res.render('main', { title: 'Public Protocols', images: renderArray });
 	});
 });
@@ -47,8 +46,9 @@ async function getMedia() {
 
 function createRender(data, params) {
 	data.sort(() => Math.random() - 0.5);
+	let quicksort = data.filter((d) => d.alt_text.length > 0);
 	if (params.key) {
-		nev = data.filter((e) => {
+		nev = quicksort.filter((e) => {
 			let m = e.title.rendered.match(params.key);
 			if (m && m.length > 0) {
 				return m[0];
@@ -56,7 +56,7 @@ function createRender(data, params) {
 		});
 		rData = randEl(nev, 10);
 	} else {
-		rData = randEl(data, 10);
+		rData = randEl(quicksort, 10);
 	}
 
 	imgArry = rData.map((item) => {

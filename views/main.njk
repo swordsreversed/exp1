@@ -3,6 +3,7 @@
 {% block content %}
 
 {% include "_header.njk" %}
+<!-- <div id="mtest"></div> -->
   <div id="menucon" style="cursor:pointer; pointer-events:auto;">
     <div class="menu">
       <ul>
@@ -21,6 +22,10 @@
 
 window.addEventListener('DOMContentLoaded', (event) => {
     console.log('DOM fully loaded and parsed');
+    console.log('mobile?', devIce)
+    if (devIce) {
+      // document.getElementById('mtest').innerHTML = 'MOBILE TEST'
+    }
 
   let maintn = [ 
     {% for image in images %}
@@ -40,7 +45,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   finImg.forEach(el => {
 
-    //console.log(el[5])
     var div = document.createElement('div');
     div.classList.add('box')
 
@@ -115,6 +119,7 @@ $( function() {
   let divsize = 250;
 
     $( ".draggable" ).draggable({
+      containment: "#maincon",
       start: function(e) {
       $('#cursor').find('img').attr('src','/images/04_Click-and-Drag-Alternative.png')
        $(' body').css('cursor', 'none');
@@ -147,8 +152,6 @@ $( function() {
 
 
     $( ".draggable" ).hover(function(){
-       //console.log($('.ui-tooltip').position())
-       //console.log($('#cursor').position())
       let cc = $(this).find('img').attr('week')
       $(this).addClass(`week${cc}`)
       $('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
@@ -165,15 +168,17 @@ $( function() {
           let res = '<div class="explain"><div>' + contn[cid][1] + '</div><div><strong>' + contn[cid][2] + '</strong>, <strong>{{key}}</strong></div></div>';
           $( this ).tooltip( "option", "content", res );
           //$( this ).css('z-index', 11100);
-
-
         },
         content: 'test',
         classes: {
           "ui-tooltip": "tooltipper"
         },
-        position: { of: "html", at: "left+5px top+140px" }
+        position: { of: "html", at: "left+15px top+140px" }
     });
+
+    if (devIce) {
+     $( ".midimg" ).tooltip( "option", "disabled", true );
+    }
 
   // set up lines last
   const unique = [...new Set(suntn.map(item => item[1]))]
@@ -184,10 +189,10 @@ $( function() {
 
   let liners = fsr.filter((user) => user.length > 1)
   let linez = [];
-
-  for (let i = 0; i < liners.length-1; i++) {
+  for (let i = 0; i < liners.length; i++) {
     // in with the artist
-    for (let j = 0; j < liners[i].length-1; j++) {
+    for (let j = 0; j < liners[i].length; j++) {
+      if (liners[i][j+1]) {
       let rndm = Math.random(1000);
 
       window['line' + liners[i][j][4]] = new LeaderLine({
@@ -199,9 +204,10 @@ $( function() {
       });
 
       linez.push(window['line' + liners[i][j][4]])
-
+      }
     }
 
+    // resize long images
     suntn.forEach((image, index) => {
       let cdoc = document.getElementById(image[4])
       if (cdoc) {
