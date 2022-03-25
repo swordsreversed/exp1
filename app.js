@@ -2,23 +2,18 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var favicon = require('serve-favicon');
 var logger = require('morgan');
-const nunjucks = require('nunjucks');
+var nunjucks = require('nunjucks');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var aboutRouter = require('./routes/about');
-var mobileRouter = require('./routes/mobile');
-var testRouter = require('./routes/test');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const aboutRouter = require('./routes/about');
+const mobileRouter = require('./routes/mobile');
+const testRouter = require('./routes/test');
 
 var app = express();
-// view engine setup
-// nunjucks.configure('views', {
-// 	autoescape: true,
-// 	express: app
-// });
-
-const env = nunjucks.configure('views', {
+var env = nunjucks.configure('views', {
 	autoescape: true,
 	express: app
 });
@@ -34,6 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.use('/', indexRouter);
 app.use('/test', testRouter);
