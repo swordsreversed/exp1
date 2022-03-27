@@ -85,7 +85,7 @@ li {
 	height: 100vh;
 	width: 100vw;
 	position: relative;
-	/* border: #7387dc 1px solid; */
+	/* border: #e36383 1px solid; */
 }
 
 .midsize {
@@ -135,6 +135,32 @@ input {
 	justify-content: space-evenly;
 	margin: 2em 3em;
 	font-weight: normal;
+}
+
+.aboutmid {
+	color: #0053e1;
+	max-width: 375px;
+	border: 1px solid #0053e1;
+	padding: 1em;
+	background-color: #fff;
+	position: relative;
+	display: inline-block;
+}
+
+.setupDrag {
+	position: absolute;
+}
+
+.aboutmid h4 {
+	color: #fff;
+	background-color: #0053e1;
+	display: inline-block;
+	padding: 0.2em;
+	margin-bottom: 1.3em;
+}
+
+.aboutmid p {
+	margin-bottom: 0.5em;
 }
 
 .content {

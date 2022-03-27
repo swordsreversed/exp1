@@ -184,11 +184,15 @@ $( function() {
   const unique = [...new Set(suntn.map(item => item[1]))]
   let fsr = []
   unique.forEach((usr) => {
-    fsr.push(suntn.filter((item) => item[1] == usr))
+    fsr.push(suntn.filter((item) => { 
+      return usr.includes(item[1]);
+      //return item[1] == usr
+      }))
   })
 
   let liners = fsr.filter((user) => user.length > 1)
   let linez = [];
+  console.log(liners);
   for (let i = 0; i < liners.length; i++) {
     // in with the artist
     for (let j = 0; j < liners[i].length; j++) {
