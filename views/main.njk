@@ -44,17 +44,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
   let mcc = document.getElementById('maincon');
 
   finImg.forEach(el => {
-
+    let img;
     var div = document.createElement('div');
-    div.classList.add('box')
+    div.classList.add('box');
 
-    let img = document.createElement('img');
+    // decide whether img or media
+    if (el[2].includes('m4a')) {
+      img = document.createElement('audio');
+      img.setAttribute('controls', true)
+    } else {
+      img = document.createElement('img');
+    }
     img.src = el[2];
     img.classList.add('midimg', 'draggable', 'hidden')
     img.setAttribute("id", el[4]);
     img.setAttribute("alt", el[1]);
     img.setAttribute("title", el[5]);
-    img.setAttribute("name", el[0]);
+    img.setAttribute("data-id", el[0]);
     div.setAttribute("id", el[0]);
     let regxw = /Week-0(\d*)_/
     let matchs = el[5].match(regxw);
@@ -157,14 +163,13 @@ $( function() {
       $('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
   
     }, function(){
-        //$(this).css("background-color", 'transparent')
         $('#cursor').find('img').attr('src','/images/01_Neutral_128.png')
     });
 
     // tooltip
     $( ".midimg" ).tooltip({
         open: function( event, ui ) {
-          let cid = event.currentTarget.name;
+          let cid = event.currentTarget.getAttribute('data-id');
           let res = '<div class="explain"><div>' + contn[cid][1] + '</div><div><strong>' + contn[cid][2] + '</strong>, <strong>{{key}}</strong>' + contn[cid][3] + '</div></div>';
           $( this ).tooltip( "option", "content", res );
           //$( this ).css('z-index', 11100);

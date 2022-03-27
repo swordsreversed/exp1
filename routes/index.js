@@ -45,8 +45,18 @@ async function getMedia() {
 }
 
 function createRender(data, params) {
-	data.sort(() => Math.random() - 0.5);
-	let quicksort = data.filter((d) => d.alt_text.length > 0);
+	// fix media data shape
+	let dataFix = data.map((d) => {
+		if (d.media_type === 'file') {
+			d.alt_text = d.title.rendered;
+
+			return d;
+		} else {
+			return d;
+		}
+	});
+	dataFix.sort(() => Math.random() - 0.5);
+	let quicksort = dataFix.filter((d) => d.alt_text.length > 0);
 	if (params.key) {
 		nev = quicksort.filter((e) => {
 			let m = e.title.rendered.match(params.key);
@@ -61,6 +71,7 @@ function createRender(data, params) {
 
 	imgArry = rData.map((item) => {
 		const regex = /<a.+>.+<\/a>/i;
+		const regexRep = /\W*/gi;
 
 		return {
 			url: item.source_url,
@@ -69,13 +80,11 @@ function createRender(data, params) {
 				.replace(/(?:\r\n|\r|\n)/g, '<br>')
 				.replace(regex, ''),
 			caption: item.caption.rendered.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+			altShort: item.alt_text.replace(regexRep, ''),
 			alt: item.alt_text.replace(/(?:\r\n|\r|\n)/g, '<br>'),
-			altShort: item.alt_text.replace(' ', ''),
 			title: item.title.rendered
 		};
 	});
-
-	// filter key here
 
 	const arrUniq = [ ...new Map(imgArry.map((v) => [ v.url, v ])).values() ];
 	return arrUniq;

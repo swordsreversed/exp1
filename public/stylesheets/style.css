@@ -202,6 +202,14 @@ input {
 	width: fit-content;
 }
 
+audio {
+	padding: 2em 2em 1em 2em;
+	min-height: 100px;
+	background-color: #3d9a21;
+	cursor: auto;
+	pointer-events: auto;
+}
+
 .ui-tooltip {
 	background-color: #fff;
 	width: fit-content;
