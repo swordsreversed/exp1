@@ -3,12 +3,7 @@
 {% block content %}
 
 {% include "_header.njk" %}
-<style>
-	body {
-		pointer-events: auto;
-		cursor: auto
-	}
-</style>
+
  <div id="menucon" style="cursor:pointer; pointer-events:auto;">
     <div class="menu">
       <ul>
@@ -22,9 +17,8 @@
     </div>
   </div>
 
-<div id="holder">
-
-	<div class="draggable aboutmid setupDrag hidden">
+<div id="holder" class="hidden">
+	<div class="draggable setupDrag aboutmid hidden">
 		<h4>About</h4>
 		<p>
 		As part of Melbourne based MPavilion’s February program theme—“Rituals: Marking Life—Public Protocols explored notions of public space through digital and physical performative practice. The month-long workshop was led by experimental design collective Space Saloon in collaboration with Melbourne-based artist/researcher Samuel Holleran with a group of 20 participants.
@@ -34,7 +28,7 @@
 		</p>
 	</div>
 
-	<div class="draggable aboutmid setupDrag hidden">
+	<div class="draggable setupDrag aboutmid hidden">
 		<h4>Themes</h4>
 		<ul>
 			<li>Rituals of Lockdown</li>
@@ -45,7 +39,7 @@
 		</ul>
 	</div>
 
-	<div class="draggable aboutmid setupDrag hidden">
+	<div class="draggable setupDrag aboutmid hidden">
 		<h4>Participants</h4>
 		<ul>
 			<li>Aislinn King</li>
@@ -70,23 +64,21 @@
 			<li>Will Scobie</li>
 		</ul>
 	</div>
-
-	
-    <div class="draggable aboutmid setupDrag hidden">
+	    <div class="draggable setupDrag aboutmid hidden">
 		<h4>Space Saloon</h4>
 
 		<p>Space Saloon is a design laboratory on the move, exploring the potentials of site by crafting collaborative hands-on experiences. Space Saloon is led by Danny Wills, Gian Maria Socci, and Rebecca van Beeck. Their pedagogical projects build communities, promote tolerance, and foster engagement through the production of transdisciplinary forms of knowledge.
 	</p>
 	</div>
 
-	<div class="draggable aboutmid setupDrag hidden">
+	<div class="draggable setupDrag aboutmid hidden">
 		<h4>Samuel Holleran</h4>
 		<p>
 	Samuel Holleran is an interdisciplinary artist and researcher in the field of civically-engaged design and art. He is currently a graduate researcher in Media & Communications at the University of Melbourne, where he is examining public participation in the re-imagination of urban cemeteries as part of the DeathTech Research Team.
 	</p>
 	</div>
 
-	<div class="draggable aboutmid setupDrag hidden">
+	<div class="draggable setupDrag aboutmid hidden">
 		<h4>M_Pavilion</h4>
 
 		<p>
@@ -96,25 +88,21 @@
 		</p>
 	</div>
 
-	<div class="draggable aboutmid setupDrag hidden">
+	<div class="draggable setupDrag aboutmid hidden">
 		<h4>Timestamp</h4>
 		<p>
 		Jan - Feb 2022, Melbourne, Australia
 		</p>
 	</div>
 
-	<div class="draggable aboutmid setupDrag hidden">
+	<div class="draggable setupDrag aboutmid hidden">
 		<h4>Web Design</h4>
 
 		<p>
 		Damon Black
 		</p>
 	</div>
-
-
 </div> <!-- end holder -->
-
-	
 
 {% endblock %}
 
@@ -162,7 +150,7 @@ $( function() {
   let divsize = 250;
 
   $( ".draggable" ).draggable({
-      containment: "#holder",
+      containment: "#maincon",
       start: function(e) {
 
       $('#cursor').find('img').attr('src','/images/04_Click-and-Drag-Alternative.png')
@@ -184,32 +172,28 @@ $( function() {
 		let dh = $(document).height();
 		let dw = $(document).width();
 
+
     $( ".draggable" ).each(function( index ) {
 
 		var bodyWidth = document.body.clientWidth
 		var bodyHeight = document.body.clientHeight;
-		console.log(bodyHeight)
-		var randPosX = Math.floor((Math.random()*bodyWidth));
-		var randPosY = Math.floor((Math.random()*bodyHeight));
-		console.log(randPosY)
-		
+		var randPosX = Math.floor((Math.random()*bodyWidth - divsize));
+		var randPosY = Math.floor((Math.random()*bodyHeight - divsize));
+		if (randPosX < 0) {
+			randPosX += divsize;
+		}
+		if (randPosY < 0) {
+			randPosY += divsize;
+		}
 		$(this).css('left', randPosX);
 		$(this).css('top', randPosY);
-  
-		{# console.log(75*dw/100 )
-		console.log(75*dh/100 )
-
-      var posw = (Math.random() * (75*dw/100 - divsize)).toFixed();
-      var posh = (Math.random() * (75*dh/100 - divsize)).toFixed();
-      $(this).css('left', posw + "px")
-      $(this).css('top', posh + "px")
-	  console.log('top', posh)
-		console.log('-----') #}
-
-      $(this).removeClass('setupDrag')
-      $(this).removeClass('hidden')
+      	
+		  //$(this).removeClass('setupDrag')
+      	$(this).removeClass('hidden')
+        //$(this).addClass('addIn')
 
     }); 
+      $('#holder').removeClass('hidden')
    
 
     $( ".draggable" ).hover(function(){

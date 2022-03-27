@@ -137,18 +137,21 @@ input {
 	font-weight: normal;
 }
 
+.setupDrag {
+	position: absolute;
+}
+
 .aboutmid {
 	color: #0053e1;
 	max-width: 375px;
 	border: 1px solid #0053e1;
 	padding: 1em;
 	background-color: #fff;
-	position: relative;
-	display: inline-block;
+	/* display: inline-block; */
 }
 
-.setupDrag {
-	position: absolute;
+.addIn {
+	position: relative;
 }
 
 .aboutmid h4 {
