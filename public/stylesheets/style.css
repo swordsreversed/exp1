@@ -51,12 +51,17 @@ a:hover {
 	color: #7387dc;
 }
 
+h1 a {
+	text-decoration: none;
+}
+
 h1,
 h2,
 h3 {
 	margin: 1em 0;
 	color: #1d1d1d;
 	font-weight: bolder;
+	text-decoration: none;
 }
 
 h1 {
