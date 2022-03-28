@@ -55,11 +55,14 @@ function createRender(data, params) {
 			return d;
 		}
 	});
+
 	dataFix.sort(() => Math.random() - 0.5);
 	let quicksort = dataFix.filter((d) => d.alt_text.length > 0);
 	if (params.key) {
+		let rg = /params.key/gi;
 		nev = quicksort.filter((e) => {
-			let m = e.title.rendered.match(params.key);
+			let m = e.caption.rendered.match(params.key);
+			console.log(m);
 			if (m && m.length > 0) {
 				return m[0];
 			}
