@@ -252,8 +252,8 @@ audio {
 	color: #0053e1;
 	display: none;
 	position: fixed;
-	top: 150px;
-	left: 150px;
+	top: 100px;
+	left: 100px;
 	justify-content: center;
 }
 
