@@ -13,6 +13,15 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     console.log('DOM fully loaded and parsed');
     console.log('mobile?', devIce)
+
+    document.querySelectorAll('a').forEach(el => {
+      $( el ).hover( () => {
+        $('#cursor').css('display', 'none');
+      },  () => {
+        $('#cursor').css('display', 'block');
+      });
+    });
+
     if (devIce) {
       // document.getElementById('mtest').innerHTML = 'MOBILE TEST'
     }
