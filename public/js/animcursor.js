@@ -27,7 +27,7 @@ let rotatingCursor = (function() {
 		cursorImageEl.style.transform = `rotate(${cursorAngle - 90}deg)`;
 		// Add trail
 		var elem = document.createElement('div');
-		var size = 3 + 'px';
+		var size = 5 + 'px';
 		elem.style.position = 'fixed';
 		elem.style.zIndex = 10001;
 		elem.style.top = currentCursorPos.y + 'px';

@@ -42,9 +42,8 @@ p {
 	font-weight: normal;
 }
 
-a,
-a:visited {
-	color: #000;
+a {
+	color: #0053e1;
 }
 
 a:hover {
@@ -52,6 +51,7 @@ a:hover {
 }
 
 h1 a {
+	color: #000;
 	text-decoration: none;
 }
 
@@ -249,24 +249,30 @@ audio {
 }
 
 #menucon {
+	color: #0053e1;
 	display: none;
 	position: fixed;
-	top: 200px;
-	width: 100%;
+	top: 150px;
+	left: 150px;
 	justify-content: center;
 }
 
 .menu {
 	background-color: #fff;
-	width: 200px;
+	width: 400px;
 	margin: 1em 3em;
 	line-height: 2em;
 	padding: 1em 3em;
 	border: solid 1px black;
+	line-height: 1.6em;
 }
 
 .menu ul {
 	padding-left: 0;
+}
+
+.menu p {
+	margin-bottom: 0.8em;
 }
 
 .image-container div {

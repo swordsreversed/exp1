@@ -4,18 +4,8 @@
 
 {% include "_header.njk" %}
 <!-- <div id="mtest"></div> -->
-  <div id="menucon" style="cursor:pointer; pointer-events:auto;">
-    <div class="menu">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/search/Week-01">Week 1</a></li>
-        <li><a href="/search/Week-02">Week 2</a></li>
-        <li><a href="/search/Week-03">Week 3</a></li>
-        <li><a href="/search/Week-04">Week 4</a></li>
-        <li> <a href="/about">About</a></li>
-      </ul>
-    </div>
-  </div>
+{% include "_modal.njk" %}
+ 
 
 {% endblock %}
 {% block script %}
@@ -52,6 +42,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     if (el[2].includes('m4a')) {
       img = document.createElement('audio');
       img.setAttribute('controls', true)
+      img.setAttribute('loop', true)
     } else {
       img = document.createElement('img');
     }
@@ -191,7 +182,6 @@ $( function() {
   unique.forEach((usr) => {
     fsr.push(suntn.filter((item) => { 
       return usr.includes(item[1]);
-      //return item[1] == usr
       }))
   })
 

@@ -4,18 +4,8 @@
 
 {% include "_header.njk" %}
 
- <div id="menucon" style="cursor:pointer; pointer-events:auto;">
-    <div class="menu">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/search/Week-01">Week 1</a></li>
-        <li><a href="/search/Week-02">Week 2</a></li>
-        <li><a href="/search/Week-03">Week 3</a></li>
-        <li><a href="/search/Week-04">Week 4</a></li>
-        <li> <a href="/about">About</a></li>
-      </ul>
-    </div>
-  </div>
+{% include "_modal.njk" %}
+ 
 
 <div id="holder" class="hidden">
 	<div class="draggable setupDrag aboutmid hidden">
@@ -31,11 +21,11 @@
 	<div class="draggable setupDrag aboutmid hidden">
 		<h4>Themes</h4>
 		<ul>
-			<li>Rituals of Lockdown</li>
-			<li>Rituals of Reverie</li>
-			<li>Rituals of Derive</li>
-			<li>Public Activations</li>
-			<li>All</li>
+			<li><a href="/search/Week-01">Rituals of Lockdown</a></li>
+			<li><a href="/search/Week-02">Rituals of Reverie</a></li>
+			<li><a href="/search/Week-03">Rituals of Derive</a></li>
+			<li><a href="/search/Week-04">Public Activations</a></li>
+			<li><a href="/">All</a></li>
 		</ul>
 	</div>
 
@@ -79,10 +69,10 @@
 	</div>
 
 	<div class="draggable setupDrag aboutmid hidden">
-		<h4>M_Pavilion</h4>
+		<h4>MPavilion</h4>
 
 		<p>
-		MPavilion is Australia’s leading architecture commission—a cultural laboratory where the community can come together to engage and share.
+		MPavilion is Australia’s leading architecture commission — a cultural laboratory where the community can come together to engage and share.
 		</p><p>
 		Each year since 2014, the Naomi Milgrom Foundation has commissioned an outstanding architect to design a pavilion for the Queen Victoria Gardens, in the centre of Melbourne’s Southbank Arts Precinct. The MPavilion then becomes the focus of a free program season of cultural events and interventions, lively talks, performances, workshops, installations and kid-friendly experiences.
 		</p>
@@ -97,7 +87,6 @@
 
 	<div class="draggable setupDrag aboutmid hidden">
 		<h4>Web Design</h4>
-
 		<p>
 		Damon Black
 		</p>
