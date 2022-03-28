@@ -169,6 +169,22 @@ $( function() {
     // tooltip
     $( ".midimg" ).tooltip({
         open: function( event, ui ) {
+          //console.log(ui.tooltip[0].style.top)
+          let lefta = $(ui.tooltip[0]).position().left;
+          let leftb = $(ui.tooltip[0]).position().left+$(this).width();
+
+          console.log(lefta, leftb)
+          
+          console.log(event.pageX, event.pageY)
+          if (event.pageX <= leftb && event.pageX >= lefta) {
+            console.log('in tha zone')
+
+            $(ui.tooltip[0]).position({
+              my: "left",
+              at: "left+200px",
+              of: ui.tooltip[0]
+            });
+          }
           let cid = event.currentTarget.getAttribute('data-id');
           let res = '<div class="explain"><div>' + contn[cid][1] + '</div><div><strong>' + contn[cid][2] + '</strong>' + contn[cid][3] + '</div></div>';
           $( this ).tooltip( "option", "content", res );
