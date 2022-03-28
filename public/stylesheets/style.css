@@ -118,10 +118,6 @@ input {
 	box-shadow: none;
 	border: 1px solid #1d1d1d;
 }
-/* .draggable,
-.cursor {
-	cursor: url("/images/clicker2.png"), auto;
-} */
 
 .draggable:hover {
 	transform: scale(1.2);
@@ -151,7 +147,6 @@ input {
 	border: 1px solid #0053e1;
 	padding: 1em;
 	background-color: #fff;
-	/* display: inline-block; */
 }
 
 .addIn {
@@ -279,22 +274,6 @@ audio {
 	width: fit-content;
 }
 
-/* .image-container img + div.afterOver {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: none;
-	color: #fff;
-}
-
-.image-container:hover img + div.afterOver {
-	display: block;
-	transition: all 0.2s ease;
-	background: rgba(0, 150, 0, .6);
-} */
-
 .box {
 	position: absolute;
 	width: 250px;
@@ -351,15 +330,14 @@ audio {
 	.box {
 		width: 150px;
 	}
-}
 
-#mtest {
-	position: absolute;
-	left: 5px;
-	top: 65px;
-	color: red;
-	text-align: center;
-	width: 100%;
-	font-size: 2em;
-	font-weight: bold;
+	#logobox {
+		margin: 0;
+	}
+
+	#menucon {
+		top: 30%;
+		left: auto;
+		width: 100%;
+	}
 }

@@ -169,16 +169,15 @@ $( function() {
        
       },
       stop: function() {
-        $('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
+		if (!devIce) {
+      		$('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
+		} else {
+      		$('#cursor').find('img').attr('src','/images/clear.png')
+        }
       }
     });
-  
-		let dh = $(document).height();
-		let dw = $(document).width();
-
 
     $( ".draggable" ).each(function( index ) {
-
 		var bodyWidth = document.body.clientWidth
 		var bodyHeight = document.body.clientHeight;
 		var randPosX = Math.floor((Math.random()*bodyWidth - divsize));
@@ -198,10 +197,13 @@ $( function() {
    
 
     $( ".draggable" ).hover(function(){
-      $('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
-  
+		if (!devIce) {
+      		$('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
+		}
     }, function(){
-        $('#cursor').find('img').attr('src','/images/01_Neutral_128.png')
+		if (!devIce) {
+        	$('#cursor').find('img').attr('src','/images/01_Neutral_128.png')
+      	}
     });
 
 });

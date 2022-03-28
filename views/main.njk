@@ -3,9 +3,7 @@
 {% block content %}
 
 {% include "_header.njk" %}
-<!-- <div id="mtest"></div> -->
 {% include "_modal.njk" %}
- 
 
 {% endblock %}
 {% block script %}
@@ -35,7 +33,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   // create imgs
   let finImg;
   if (devIce) {
-    finImg = maintn.slice(0,5)
+    finImg = maintn.slice(0,7)
   } else {
     finImg = [...maintn];
   }
@@ -105,6 +103,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     mc.style.zIndex = 0;
   }
 
+  // end js
 });
 
 $( function() {
@@ -127,9 +126,9 @@ $( function() {
     $( ".draggable" ).draggable({
       containment: "#maincon",
       start: function(e) {
-      $('#cursor').find('img').attr('src','/images/04_Click-and-Drag-Alternative.png')
-       $(' body').css('cursor', 'none');
-         $( ".draggable" ).each(function( index ) {
+        $('#cursor').find('img').attr('src','/images/04_Click-and-Drag-Alternative.png')
+        $(' body').css('cursor', 'none');
+        $( ".draggable" ).each(function( index ) {
           $(this).css("z-index", "1");
         });
         $('#cursor').css("z-index", "10210");
@@ -141,13 +140,16 @@ $( function() {
         })
       },
       stop: function() {
-        $('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
+        if (!devIce) {
+      		$('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
+		    } else {
+      		$('#cursor').find('img').attr('src','/images/clear.png')
+        }
       }
     });
   
 
     $( ".draggable" ).each(function( index ) {
-
       var posw = (Math.random() * ($(document).width() - divsize)).toFixed();
       var posh = (Math.random() * ($(document).height() - divsize)).toFixed();
       $(this).css('left', posw + "px")
@@ -156,29 +158,25 @@ $( function() {
       $(this).removeClass('hidden')
     }); 
 
-
     $( ".draggable" ).hover(function(){
       let cc = $(this).find('img').attr('week')
-      $(this).addClass(`week${cc}`)
-      $('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
+      $(this).addClass(`week${cc}`);
+      if (!devIce) {
+      		$('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
+		  }
   
     }, function(){
+      if (!devIce) {
         $('#cursor').find('img').attr('src','/images/01_Neutral_128.png')
+      }
     });
 
     // tooltip
     $( ".midimg" ).tooltip({
         open: function( event, ui ) {
-          //console.log(ui.tooltip[0].style.top)
           let lefta = $(ui.tooltip[0]).position().left;
           let leftb = $(ui.tooltip[0]).position().left+$(this).width();
-
-          console.log(lefta, leftb)
-          
-          console.log(event.pageX, event.pageY)
           if (event.pageX <= leftb && event.pageX >= lefta) {
-            console.log('in tha zone')
-
             $(ui.tooltip[0]).position({
               my: "left",
               at: "left+250px",
@@ -187,8 +185,7 @@ $( function() {
           }
           let cid = event.currentTarget.getAttribute('data-id');
           let res = '<div class="explain"><div>' + contn[cid][1] + '</div><div><strong>' + contn[cid][2] + '</strong>' + contn[cid][3] + '</div></div>';
-          $( this ).tooltip( "option", "content", res );
-          //$( this ).css('z-index', 11100);
+          $( this ).tooltip( 'option', 'content', res );
         },
         content: 'test',
         classes: {
