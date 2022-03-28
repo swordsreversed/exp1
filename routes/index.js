@@ -59,9 +59,9 @@ function createRender(data, params) {
 	dataFix.sort(() => Math.random() - 0.5);
 	let quicksort = dataFix.filter((d) => d.alt_text.length > 0);
 	if (params.key) {
-		let rg = /params.key/gi;
+		var re = new RegExp(params.key, 'i');
 		nev = quicksort.filter((e) => {
-			let m = e.caption.rendered.match(params.key);
+			let m = e.caption.rendered.match(re);
 			console.log(m);
 			if (m && m.length > 0) {
 				return m[0];
