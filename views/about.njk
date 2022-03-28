@@ -108,7 +108,7 @@
 window.addEventListener('DOMContentLoaded', (event) => {
 
 	document.querySelectorAll('a').forEach(el => {
-		$( el ).hover( () => {
+		$(el).hover( () => {
 			$('#cursor').css('display', 'none');
 		},  () => {
 			$('#cursor').css('display', 'block');
@@ -153,25 +153,31 @@ $( function() {
 
   let divsize = 250;
 
+	$( ".draggable" ).mousedown((event) => {
+      if (devIce) {
+          $(this).css('transform','scale(1)');
+          $(event.currentTarget).css('transform','scale(1.6)');
+          $(event.currentTarget).css("z-index", "1010"); 
+      	}
+    })
+
   $( ".draggable" ).draggable({
       containment: "#maincon",
       start: function(e) {
-
-      $('#cursor').find('img').attr('src','/images/04_Click-and-Drag-Alternative.png')
-       $(' body').css('cursor', 'none');
-         $( ".draggable" ).each(function( index ) {
+      	$('#cursor').find('img').attr('src','/images/04_Click-and-Drag-Alternative.png')
+       	$(' body').css('cursor', 'none');
+         $( ".draggable" ).each(function(index) {
           $(this).css("z-index", "1");
         });
         $('#cursor').css("z-index", "10210");
         $(this).css("z-index", "1010");
       },
-      drag: function() {
-       
-      },
+      drag: function() {},
       stop: function() {
 		if (!devIce) {
       		$('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
 		} else {
+			$(this).css('transform','scale(1)');
       		$('#cursor').find('img').attr('src','/images/clear.png')
         }
       }

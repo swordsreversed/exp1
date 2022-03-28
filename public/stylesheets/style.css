@@ -340,4 +340,10 @@ audio {
 		left: auto;
 		width: 100%;
 	}
+
+	.aboutmid {
+		width: 50%;
+		font-size: 0.7em;
+		line-height: 1em;
+	}
 }
