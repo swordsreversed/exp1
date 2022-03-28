@@ -161,7 +161,7 @@ $( function() {
     $( ".midimg" ).tooltip({
         open: function( event, ui ) {
           let cid = event.currentTarget.getAttribute('data-id');
-          let res = '<div class="explain"><div>' + contn[cid][1] + '</div><div><strong>' + contn[cid][2] + '</strong>, <strong>{{key}}</strong>' + contn[cid][3] + '</div></div>';
+          let res = '<div class="explain"><div>' + contn[cid][1] + '</div><div><strong>' + contn[cid][2] + '</strong>' + contn[cid][3] + '</div></div>';
           $( this ).tooltip( "option", "content", res );
           //$( this ).css('z-index', 11100);
         },
