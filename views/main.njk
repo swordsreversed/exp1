@@ -140,6 +140,7 @@ $( function() {
         if (!devIce) {
       		$('#cursor').find('img').attr('src','/images/03_Hover-OnClick-and-Drag_1282.png')
 		    } else {
+          $(this).css('transform','scale(1)');
       		$('#cursor').find('img').attr('src','/images/clear.png')
         }
       }
