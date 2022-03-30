@@ -321,15 +321,6 @@ audio {
 	stroke-dasharray: 6, 6;
 }
 
-#loader {
-	width: 200px;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	border: 1px solid paleturquoise;
-}
-
 @media screen and (max-width: 480px) {
 	.logo {
 		width: 100%;
