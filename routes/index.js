@@ -1,26 +1,43 @@
 var express = require('express');
 var router = express.Router();
 let fetch = require('node-fetch');
+const NodeCache = require('node-cache');
 let regxw = /Week-0(\d*)_/;
 let media = [];
 let rData;
 let nev;
 let dataPromise;
+const myCache = new NodeCache({ stdTTL: 604800 });
 
-router.get('/', function(req, res, next) {
-	dataPromise = getMedia(req.params);
-	dataPromise.then((data) => {
-		let renderArray = createRender(data, req.params);
-		res.render('main', { title: 'Public Protocols', images: renderArray });
-	});
+router.get('/', async (req, res, next) => {
+	// dataPromise = getMedia(req.params);
+	// dataPromise.then((data) => {
+	// 	let renderArray = createRender(data, req.params);
+	// 	res.render('main', { title: 'Public Protocols', images: renderArray });
+	// });
+	let posts = myCache.get('allPosts');
+
+	if (posts == null) {
+		console.log('no cache');
+		posts = await getMedia(req.params);
+		myCache.set('allPosts', posts, 604800);
+	}
+
+	let renderArray = createRender(posts, req.params);
+	res.render('main', { title: 'Public Protocols', images: renderArray });
 });
 
-router.get('/search/:key', function(req, res, next) {
-	dataPromise = getMedia(req.params);
-	dataPromise.then((data) => {
-		let renderArray = createRender(data, req.params);
-		res.render('main', { title: 'Public Protocols', images: renderArray, key: req.params.key });
-	});
+router.get('/search/:key', async (req, res, next) => {
+	let posts = myCache.get('allPosts');
+
+	if (posts == null) {
+		console.log('no cache');
+		posts = await getMedia(req.params);
+		myCache.set('allPosts', posts, 300);
+	}
+
+	let renderArray = createRender(posts, req.params);
+	res.render('main', { title: 'Public Protocols', images: renderArray, key: req.params.key });
 });
 
 let randEl = (array, number) => {
@@ -62,7 +79,6 @@ function createRender(data, params) {
 		var re = new RegExp(params.key, 'i');
 		nev = quicksort.filter((e) => {
 			let m = e.caption.rendered.match(re);
-			console.log(m);
 			if (m && m.length > 0) {
 				return m[0];
 			}
