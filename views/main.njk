@@ -179,7 +179,9 @@ $( function() {
             });
           }
           let cid = event.currentTarget.getAttribute('data-id');
-          let res = '<div class="explain"><div>' + contn[cid][1] + '</div><div><strong>' + contn[cid][2] + '</strong>' + contn[cid][3] + '</div></div>';
+          let splittag = contn[cid][3].split(',')
+          console.log(splittag[1].trim());
+          let res = '<div class="explain"><div>' + contn[cid][1] + '</div><div><strong>' + contn[cid][2] + '</strong><p>' + splittag[1].trim() + '</p></div></div>';
           $( this ).tooltip( 'option', 'content', res );
         },
         content: 'test',

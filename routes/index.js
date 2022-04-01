@@ -10,11 +10,6 @@ let dataPromise;
 const myCache = new NodeCache({ stdTTL: 604800 });
 
 router.get('/', async (req, res, next) => {
-	// dataPromise = getMedia(req.params);
-	// dataPromise.then((data) => {
-	// 	let renderArray = createRender(data, req.params);
-	// 	res.render('main', { title: 'Public Protocols', images: renderArray });
-	// });
 	let posts = myCache.get('allPosts');
 
 	if (posts == null) {
