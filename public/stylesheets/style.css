@@ -360,4 +360,8 @@ audio {
 		font-size: 0.7em;
 		line-height: 1em;
 	}
+
+	.supportlogo {
+		width: 100%;
+	}
 }
