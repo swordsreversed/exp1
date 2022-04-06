@@ -314,6 +314,20 @@ audio {
 	display: inline;
 }
 
+.support {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.support div {
+	padding: 1em;
+}
+
+.supportlogo {
+	width: 200px;
+}
+
 .dashedline {
 	fill: none;
 	stroke: #000;

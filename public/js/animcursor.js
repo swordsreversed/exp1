@@ -1,5 +1,4 @@
 let rotatingCursor = (function() {
-	/* Local Variables */
 	const INTERVAL_POSITION = 5;
 	const INTERVAL_ROTATION = 100;
 	let lastCursorPos = { x: -999, y: -999 };
@@ -8,9 +7,6 @@ let rotatingCursor = (function() {
 		cursorAngle = 0;
 	let cursorEl, cursorImageEl, h, wintimer;
 
-	/* Local Functions */
-
-	// NOTE: I am transform two different elements here because so I can only animate the rotation with 'transition-property: transform'.
 	function setCurrentCursorProps() {
 		// Apply translation (set to actual cursor position)
 		cursorEl.style.transform = `translate(${currentCursorPos.x}px, ${currentCursorPos.y}px)`;

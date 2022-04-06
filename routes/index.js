@@ -8,12 +8,12 @@ let rData;
 let nev;
 let dataPromise;
 const myCache = new NodeCache({ stdTTL: 604800 });
+const server = 'https://ppwp.insectposse.com';
 
 router.get('/', async (req, res, next) => {
 	let posts = myCache.get('allPosts');
 
 	if (posts == null) {
-		console.log('no cache');
 		posts = await getMedia(req.params);
 		myCache.set('allPosts', posts, 604800);
 	}
@@ -26,7 +26,6 @@ router.get('/search/:key', async (req, res, next) => {
 	let posts = myCache.get('allPosts');
 
 	if (posts == null) {
-		console.log('no cache');
 		posts = await getMedia(req.params);
 		myCache.set('allPosts', posts, 300);
 	}
@@ -44,12 +43,12 @@ let randEl = (array, number) => {
 };
 
 async function getMedia() {
-	const tdata = await fetch('http://34.129.140.166/wp-json/wp/v2/media?per_page=100');
+	const tdata = await fetch(server + '/wp-json/wp/v2/media?per_page=100');
 	const [ ...nres ] = await tdata.headers;
 	const total = nres.filter((el) => el[0] == 'x-wp-totalpages');
 
 	for (let index = 1; index <= total[0][1]; index++) {
-		let url = 'http://34.129.140.166/wp-json/wp/v2/media?per_page=100&page=' + index;
+		let url = server + '/wp-json/wp/v2/media?per_page=100&page=' + index;
 		let jdata = await fetch(url);
 		media.push(await jdata.json());
 	}

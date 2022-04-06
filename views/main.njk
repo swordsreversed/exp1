@@ -9,7 +9,6 @@
 {% block script %}
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    console.log('DOM fully loaded and parsed');
     document.querySelectorAll('a').forEach(el => {
       $(el).hover( () => {
         $('#cursor').css('display', 'none');
@@ -180,7 +179,6 @@ $( function() {
           }
           let cid = event.currentTarget.getAttribute('data-id');
           let splittag = contn[cid][3].split(',')
-          console.log(splittag[1].trim());
           let res = '<div class="explain"><div>' + contn[cid][1] + '</div><div><strong>' + contn[cid][2] + '</strong><p>' + splittag[1].trim() + '</p></div></div>';
           $( this ).tooltip( 'option', 'content', res );
         },
