@@ -14,25 +14,24 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>{{ title }}</title>
   <meta property="og:type" content="website">
-<meta property="og:url" content="https://publicprotocols.org/">
-<meta property="og:title" content="Public Protocols"/>
-<meta property="og:description" content="Public Protocols explores notions of public space in Melbourne through digital and physical performative practice. "/>
-<meta property="og:image" content="https://publicprotocols.org/images/Tess-Nettlefold_Week-02_01.png"/>
-<meta property="og:image:width" content="500"/>
-<meta property="og:image:height" content="375"/>
-
+  <meta property="og:url" content="https://publicprotocols.org/">
+  <meta property="og:title" content="Public Protocols"/>
+  <meta property="og:description" content="Public Protocols explores notions of public space in Melbourne through digital and physical performative practice. "/>
+  <meta property="og:image:secure_url" content="https://publicprotocols.org/images/Tess-Nettlefold_Week-02_01.png"/>
+  <meta property="og:image:type" content="image/png" /> 
+  <meta property="og:image:width" content="500"/>
+  <meta property="og:image:height" content="375"/>
 
   <script>
-let touch = 0;
-if (navigator.maxTouchPoints > 1) {
-	touch = 1;
-	console.log('nn', navigator.userAgent);
-}
+    let touch = 0;
+    if (navigator.maxTouchPoints > 1) {
+      touch = 1;
+      console.log('nn', navigator.userAgent);
+    }
 
-const regex = new RegExp(/iPhone/);
+    const regex = new RegExp(/iPhone/);
 
-let devIce = regex.test(navigator.userAgent);
-
+    let devIce = regex.test(navigator.userAgent);
 </script>
 </head>
 <body>
