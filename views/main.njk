@@ -5,6 +5,25 @@
 {% include "_header.njk" %}
 {% include "_modal.njk" %}
 
+<div class="bottominfo info">
+  <div class="aboutmid">
+		<h4>About</h4>
+		<p>
+    A special MProject workshop led by Space Saloon and Sam Holleran 			</p>
+
+	</div>
+  <div class="aboutmid">
+		<h4>Support</h4>
+		<p>
+     <div class="">
+			<div><img class="supportlogo" src="/images/MPA4349_2021_Logomarkss.png" alt="MPavilion"/></div>
+		</div>
+    <div class="info">
+			<div><img class="infologo" src="/images/NMF-Logo-Blacks.jpg" alt="Naomi Milgrom Foundation"/></div>
+			<div><img class="infologo" src="/images/Bloomberg_Philanthropies_Logo_BWs.jpg" alt="Bloomberg Philanthropies"/></div>
+		</div>
+	</div>
+	</div>
 {% endblock %}
 {% block script %}
 
@@ -189,9 +208,17 @@ $( function() {
         position: { of: "html", at: "left+15px top+140px" }
     });
 
-    if (devIce) {
-     $( ".midimg" ).tooltip( "option", "disabled", true );
-    }
+  if (devIce) {
+    let mscr = window.innerHeight + 300;
+    console.log(mscr)
+    $('body').css('height', mscr+'px');
+    $('.bottominfo').css('position', 'fixed');
+    $('.bottominfo').css('bottom', 0+'px');
+
+    $( ".midimg" ).tooltip( "option", "disabled", true );
+  }
+
+  {# alert() #}
 
   // set up lines last
   const unique = [...new Set(suntn.map(item => item[1]))]
